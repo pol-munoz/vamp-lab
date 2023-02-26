@@ -2,6 +2,12 @@
   margin: 0;
 }
 
+.App-placeholder {
+  margin: 2rem;
+  opacity: 0.4;
+  text-align: center;
+}
+
 .App-header {
   background: #4e3e3b;
   border-bottom: 1px solid #5e4e4b;

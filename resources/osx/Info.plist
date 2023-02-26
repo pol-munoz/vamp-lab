@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>UTExportedTypeDeclarations</key>
+    <array>
+        <dict>
+            <key>UTTypeIdentifier</key>
+            <string>dev.pulmunyi.vamplab-project</string>
+            <key>UTTypeConformsTo</key>
+            <array>
+                <string>public.json</string>
+            </array>
+            <key>UTTypeDescription</key>
+            <string>VampLab Project</string>
+            <key>UTTypeTagSpecification</key>
+            <dict>
+                <key>public.filename-extension</key>
+                <array>
+                    <string>vamplab</string>
+                    <string>vamp</string>
+                </array>
+            </dict>
+
+            <key>UTTypeIconFile</key>
+            <array>
+                <string>vamp.icns</string>
+            <array/>
+        </dict>
+    </array>
+</dict>
+</plist>

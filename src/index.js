@@ -80,3 +80,5 @@ ipcMain.handle('dark-mode:toggle', () => {
 ipcMain.handle('dark-mode:system', () => {
   nativeTheme.themeSource = 'system'
 });
+
+import './apis/projects'

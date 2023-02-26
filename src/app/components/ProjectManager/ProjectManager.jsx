@@ -3,25 +3,27 @@ import "./ProjectManager.css";
 import Button from "../../../components/Button/Button";
 
 function createNewProject() {
-    console.log("NEW")
+    window.projects.create()
 }
 
 function openExistingProject() {
-    console.log("OPEN")
+    window.projects.open()
 }
 
 export default function ProjectManager() {
+    let recents = []
+
     return (
         <div className="ProjectManager">
             <div className="App-header ProjectManager-header">
                 <h2 className="App-title">Projects</h2>
                 <div className="ProjectManager-header-buttons">
                     <Button onClick={createNewProject}>New</Button>
-                    <Button onClick={openExistingProject} disabled>Open</Button>
+                    <Button onClick={openExistingProject}>Open</Button>
                 </div>
             </div>
             <div className="ProjectManager-list">
-
+                { recents.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : <p>TODO</p>}
             </div>
         </div>
     );

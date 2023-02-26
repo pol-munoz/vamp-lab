@@ -4,5 +4,10 @@ import { contextBridge, ipcRenderer } from 'electron';
 
 contextBridge.exposeInMainWorld('darkMode', {
     toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
-    system: () => ipcRenderer.invoke('dark-mode:system')
+    system: () => ipcRenderer.invoke('dark-mode:system'),
+});
+
+contextBridge.exposeInMainWorld('projects', {
+    create: () => ipcRenderer.invoke('projects:create'),
+    open: () => ipcRenderer.invoke('projects:open'),
 });
