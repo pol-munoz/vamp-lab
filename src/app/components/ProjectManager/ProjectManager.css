@@ -1,0 +1,21 @@
+.ProjectManager {
+}
+
+.ProjectManager-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ProjectManager-header-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.ProjectManager-list {
+}

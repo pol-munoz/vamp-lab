@@ -16,6 +16,7 @@ if (require('electron-squirrel-startup')) {
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    title: "VampLab",
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },

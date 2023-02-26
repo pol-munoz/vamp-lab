@@ -1,0 +1,29 @@
+.Button {
+  padding: 0.3rem 1rem;
+  border-radius: 100vmax;
+  border: none;
+  font-size: 0.9rem;
+  background: #dc334a;
+  color: white;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
+}
+
+.Button:not([disabled]) {
+  cursor: pointer;
+}
+
+.Button:not([disabled]):hover {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 2px 3px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.3);
+}
+.Button:not([disabled]):active {
+  filter: brightness(1.2);
+  transform: scale(1);
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
+}
+
+.Button:disabled {
+  opacity: 0.6;
+  box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
+}

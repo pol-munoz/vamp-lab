@@ -1,0 +1,17 @@
+.App-title {
+  margin: 0;
+}
+
+.App-header {
+  background: #4e3e3b;
+  border-bottom: 1px solid #5e4e4b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+}
+
+@media (prefers-color-scheme: light) {
+  .App-header {
+    background: #f3efef;
+    border-bottom: 1px solid #e3dede;
+  }
+}
