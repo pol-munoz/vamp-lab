@@ -11,7 +11,7 @@ function openExistingProject() {
 }
 
 export default function ProjectManager() {
-    let recents = []
+    let recent = []
 
     return (
         <div className="ProjectManager">
@@ -23,7 +23,7 @@ export default function ProjectManager() {
                 </div>
             </div>
             <div className="ProjectManager-list">
-                { recents.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : <p>TODO</p>}
+                {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
             </div>
         </div>
     );
