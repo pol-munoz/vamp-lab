@@ -12,11 +12,15 @@ export default function ActiveProject() {
     const navigate = useNavigate()
 
     return (
-        <div className="ProjectHome">
-            {state.activeProject.name}
-            <Button onClick={() => navigate(-1)}>
-                Back
-            </Button>
+        <div className="Vamp-screen">
+            <div className="Vamp-header">
+                <h2 className="Vamp-title">{state.activeProject.name} - Songs</h2>
+                <Button onClick={() => navigate(-1)}>
+                    Back
+                </Button>
+            </div>
+            <div className="Vamp-screen-list">
+            </div>
         </div>
     )
 }

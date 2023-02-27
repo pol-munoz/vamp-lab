@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useNavigate, useOutletContext} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import './RecentProjects.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
@@ -7,7 +7,7 @@ import {StoreContext} from '../../StoreContext'
 
 export default function RecentProjects() {
     const [recentProjects, setRecentProjects] = useState([])
-    const { state, dispatch } = useContext(StoreContext)
+    const { dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -53,16 +53,16 @@ export default function RecentProjects() {
     ))
 
     return (
-        <div className="RecentProjects">
-            <div className="Vamp-header RecentProjects-header">
+        <div className="Vamp-screen">
+            <div className="Vamp-header">
                 <h2 className="Vamp-title">Projects</h2>
-                <div className="RecentProjects-header-buttons">
+                <div className="Vamp-header-buttons">
                     <Button onClick={createNewProject}>New</Button>
                     <Button onClick={openExistingProject}>Open</Button>
                 </div>
             </div>
-            <div className="RecentProjects-list">
-                {recent.length === 0 ? <p className="Vamp-placeholder">Recent projects will appear here</p> : recent}
+            <div className="Vamp-screen-list">
+                {recent.length > 0 ? recent : <p className="Vamp-placeholder">Recent projects will appear here</p> }
             </div>
         </div>
     )
