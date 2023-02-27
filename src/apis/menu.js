@@ -2,7 +2,7 @@ const {app, Menu} = require('electron')
 
 const isMac = process.platform === 'darwin'
 
-// TODO change based on navigation?
+// TODO complete based on navigation? e.g. When in Projects screen -> File > New Project
 const template = [
     // { role: 'appMenu' }
     ...(isMac ? [{
