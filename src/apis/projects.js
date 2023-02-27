@@ -3,13 +3,36 @@ import {promises as fs} from 'fs'
 import path from 'path'
 
 import Project from '../model/Project'
-import {store} from './store'
+import {RECENT_PROJECTS_STORE_KEY, store} from './store'
 import RecentProject from '../model/RecentProject'
-import {RECENT_PROJECTS_STORE_KEY} from './keys'
 
 const VAMP_FILE_TYPE = {
     name: 'Vamp Project',
     extensions: ['vamp']
+}
+
+// Actually open the project, reused everywhere in the code
+function openProject(project) {
+    // Update native recent projects
+    app.addRecentDocument(project.path)
+
+    // Update "internal" recent projects
+    let recentProject = new RecentProject(project.name, project.path)
+    let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
+    recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
+    recentProjects = [recentProject, ...recentProjects]
+    store.set(RECENT_PROJECTS_STORE_KEY, recentProjects)
+
+    // TODO Actually Open in App
+}
+
+// Open the project from a file, reused sometimes in the code
+function openProjectFromFile(filePath) {
+    fs.readFile(filePath, 'utf8').then(text => {
+        let data = JSON.parse(text)
+        let project = Project.from(data)
+        openProject(project)
+    })
 }
 
 function onCreate() {
@@ -42,35 +65,36 @@ function onOpen() {
         }
     })
 }
+
 function nativeOpen(event, filePath) {
     event.preventDefault()
 
     openProjectFromFile(filePath)
 }
 
-function openProjectFromFile(filePath) {
-    fs.readFile(filePath, 'utf8').then(text => {
-        let data = JSON.parse(text)
-        let project = Project.from(data)
-        openProject(project)
-    })
+function onOpenRecent(event, recentProject) {
+    openProjectFromFile(recentProject.path)
 }
 
-function openProject(project) {
-    // Update native recent projects
-    app.addRecentDocument(project.path)
-
-    // Update "internal" recent projects
-    let newRecentProject = new RecentProject(project.name, project.path)
+function onDeleteRecent(event, recentProject) {
     let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
-
-    recentProjects.filter((a, b) => (a.path === b.path))
-
-    recentProjects = [newRecentProject, ...recentProjects]
+    recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
     store.set(RECENT_PROJECTS_STORE_KEY, recentProjects)
+
+    BrowserWindow.getFocusedWindow().webContents.send('projects:onRecentUpdate', recentProjects)
 }
 
-ipcMain.handle('projects:create', onCreate)
-ipcMain.handle('projects:open', onOpen)
+async function getRecents() {
+    return RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
+}
+
+app.whenReady().then(() => {
+    // TODO most of these can be "on"?
+    ipcMain.handle('projects:create', onCreate)
+    ipcMain.handle('projects:open', onOpen)
+    ipcMain.handle('projects:openRecent', onOpenRecent)
+    ipcMain.handle('projects:deleteRecent', onDeleteRecent)
+    ipcMain.handle('projects:getRecents', getRecents)
+})
 
 app.on('open-file', nativeOpen)

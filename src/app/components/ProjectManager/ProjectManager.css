@@ -1,4 +1,7 @@
 .ProjectManager {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .ProjectManager-header {
@@ -18,4 +21,6 @@
 }
 
 .ProjectManager-list {
+  overflow-y: scroll;
+  flex: 1;
 }

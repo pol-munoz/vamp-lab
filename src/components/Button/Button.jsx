@@ -5,8 +5,15 @@ import './Button.css'
 export default function Button(props) {
     let className = 'Button'
 
+    if (props.transparent) {
+        className += '-transparent'
+    }
+    if (props.round) {
+        className += ' Button-round'
+    }
+
     if (props.className) {
-        className += ` ${className}`
+        className += ` ${props.className}`
     }
 
     return (

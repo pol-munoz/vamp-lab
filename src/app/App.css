@@ -9,15 +9,10 @@
 }
 
 .App-header {
-  background: #4e3e3b;
-  border-bottom: 1px solid #5e4e4b;
+  background: var(--bg-color-light);
+  border-bottom: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   padding: 1rem;
-}
-
-@media (prefers-color-scheme: light) {
-  .App-header {
-    background: #f3efef;
-    border-bottom: 1px solid #e3dede;
-  }
+  position: relative;
+  z-index: 1000;
 }

@@ -1,8 +1,7 @@
 import {app, BrowserWindow, ipcMain, nativeTheme} from 'electron'
 
 
-import {store} from './apis/store'
-import {BOUNDS_STORE_KEY} from './apis/keys'
+import {BOUNDS_STORE_KEY, store} from './apis/store'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {

@@ -10,7 +10,6 @@ export default class RecentProject {
     }
 
     static fromArray(array) {
-        console.log(array)
         if (!array) {
             return []
         }

@@ -1,14 +1,23 @@
-.Button {
+.Button, .Button-transparent {
   padding: 0.3rem 1rem;
   border-radius: 100vmax;
   border: none;
   font-size: 0.9rem;
+}
+
+.Button {
   background: #dc334a;
   color: white;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
 }
 
-.Button:not([disabled]) {
+.Button-transparent {
+  opacity: 0.6;
+  color: inherit;
+  background: none;
+}
+
+.Button:not([disabled]), .Button-transparent:not([disabled]) {
   cursor: pointer;
 }
 
@@ -26,4 +35,20 @@
 .Button:disabled {
   opacity: 0.6;
   box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
+}
+
+.Button-transparent:disabled {
+  opacity: 0.2;
+}
+
+.Button-transparent:not([disabled]):hover {
+  opacity: 1;
+  background: rgba(255, 128, 128, 0.2);
+}
+
+.Button-round {
+  padding: 0;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  min-width: calc(1.8rem);
 }

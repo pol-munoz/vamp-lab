@@ -10,18 +10,9 @@ contextBridge.exposeInMainWorld('darkMode', {
 contextBridge.exposeInMainWorld('projects', {
     create: () => ipcRenderer.invoke('projects:create'),
     open: () => ipcRenderer.invoke('projects:open'),
-})
-
-contextBridge.exposeInMainWorld('electron', {
-    store: {
-        get(key) {
-            return ipcRenderer.sendSync('electron-store-get', key)
-        },
-        set(property, val) {
-            ipcRenderer.send('electron-store-set', property, val)
-        },
-        // Other method you want to add like has(), reset(), etc.
-    },
-    // Any other methods you want to expose in the window object.
-    // ...
+    openRecent: recentProject => ipcRenderer.invoke('projects:openRecent', recentProject),
+    deleteRecent: recentProject => ipcRenderer.invoke('projects:deleteRecent', recentProject),
+    getRecents: () => ipcRenderer.invoke('projects:getRecents'),
+    onRecentUpdate: callback => ipcRenderer.on('projects:onRecentUpdate', callback),
+    offRecentUpdate: callback => ipcRenderer.removeListener('projects:onRecentUpdate', callback),
 })
