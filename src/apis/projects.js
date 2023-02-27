@@ -1,5 +1,6 @@
 import {ipcMain, dialog, BrowserWindow} from "electron";
 import {promises as fs} from 'fs';
+const path = require('path');
 import Project from "../model/Project";
 
 const VAMP_FILE_TYPE = {
@@ -14,17 +15,16 @@ function onCreate() {
         filters: [VAMP_FILE_TYPE],
     }).then(res => {
         if (!res.canceled) {
-            let path = res.filePath
-            let parts = path.split('/')
-            let name = parts[parts.length - 1].replace('.vamp', '')
-            let project = new Project(name, path)
+            let filePath = res.filePath
+            let name = path.basename(filePath, '.vamp')
+            let project = new Project(name, filePath)
             let json = JSON.stringify(project, null, 2)
-            fs.writeFile(path, json,  {
+            fs.writeFile(filePath, json,  {
                 encoding: 'utf8',
                 mode: 0o600
             }).then(() => {
                 // TODO add to recents and open
-                console.log(path)
+                console.log(filePath)
             })
         }
     })
@@ -35,8 +35,8 @@ function onOpen() {
         filters: [VAMP_FILE_TYPE],
     }).then(res => {
         if (!res.canceled) {
-            let path = res.filePaths[0]
-            fs.readFile(path, 'utf8').then(text => {
+            let filePath = res.filePaths[0]
+            fs.readFile(filePath, 'utf8').then(text => {
                 let data = JSON.parse(text)
                 let project = Project.from(data)
                 // TODO open
@@ -46,6 +46,7 @@ function onOpen() {
     })
 }
 
+// TODO
 function openProject() {
 
 }
