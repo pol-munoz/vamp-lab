@@ -1,6 +1,6 @@
 {
   "name": "vamp-lab",
-  "productName": "vamp-lab",
+  "productName": "VampLab",
   "version": "1.0.0",
   "description": "Vamp management software for musical theatre plays",
   "main": ".webpack/main",
@@ -36,8 +36,10 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
+    "immer": "^9.0.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.1"
+    "react-router-dom": "^6.8.1",
+    "use-immer": "^0.8.1"
   }
 }

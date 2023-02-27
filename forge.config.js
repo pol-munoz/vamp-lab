@@ -1,5 +1,9 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: '/resources/icon',
+    extraResource: 'resources/osx/vamp.icns',
+    extendInfo: 'resources/osx/Info.plist'
+  },
   rebuildConfig: {},
   makers: [
     {
@@ -7,12 +11,23 @@ module.exports = {
       config: {},
     },
     {
+      name: '@electron-forge/maker-dmg',
+      platforms: ['darwin'],
+      config: {
+        format: 'ULFO'
+      }
+    },
+    {
       name: '@electron-forge/maker-zip',
       platforms: ['darwin'],
     },
     {
       name: '@electron-forge/maker-deb',
-      config: {},
+      config: {
+        options: {
+          icon: '/resources/icon.png'
+        }
+      },
     },
     {
       name: '@electron-forge/maker-rpm',
