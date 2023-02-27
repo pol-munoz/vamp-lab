@@ -12,7 +12,5 @@ contextBridge.exposeInMainWorld('projects', {
     open: () => ipcRenderer.invoke('projects:open'),
     openRecent: recentProject => ipcRenderer.invoke('projects:openRecent', recentProject),
     deleteRecent: recentProject => ipcRenderer.invoke('projects:deleteRecent', recentProject),
-    getRecents: () => ipcRenderer.invoke('projects:getRecents'),
-    onRecentUpdate: callback => ipcRenderer.on('projects:onRecentUpdate', callback),
-    offRecentUpdate: callback => ipcRenderer.removeListener('projects:onRecentUpdate', callback),
+    getRecent: () => ipcRenderer.invoke('projects:getRecent'),
 })

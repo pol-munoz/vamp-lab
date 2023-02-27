@@ -1,56 +1,68 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
+import {useNavigate, useOutletContext} from 'react-router-dom'
 import './ProjectManager.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
 
-function createNewProject() {
-    window.projects.create()
-}
+export default function ProjectManager(props) {
+    const [recentProjects, setRecentProjects] = useState([])
+    const navigate = useNavigate()
+    const [_, setActiveProject] = useOutletContext();
+    console.log('RENDER ProjectManager')
 
-function openExistingProject() {
-    window.projects.open()
-}
-
-export default class ProjectManager extends Component {
-    state = {
-        recentProjects: []
-    }
-
-    listener = (event, recentProjects) => {
-        this.setState({recentProjects})
-    }
-
-    componentDidMount() {
+    useEffect(() => {
         let init = async () => {
-            this.setState({ recentProjects: await window.projects.getRecents() })
+            setRecentProjects(await window.projects.getRecent())
         }
-        init().then(() => {
-            window.projects.onRecentUpdate(this.listener)
-        })
+        void init()
+    }, [])
+
+
+    let createNewProject = async () => {
+        let project = await window.projects.create()
+        navigateToProject(project)
     }
 
-    componentWillUnmount() {
-        window.projects.offRecentUpdate(this.listener)
+    let openExistingProject = async () => {
+        let project = await window.projects.open()
+        navigateToProject(project)
     }
 
-    render() {
-        let recent = this.state.recentProjects.map(recentProject => (
-            <RecentProjectItem project={recentProject} key={recentProject.path}/>
-        ))
+    let openRecentProject = async recentProject => {
+        let project = await window.projects.openRecent(recentProject)
+        navigateToProject(project)
+    }
 
-        return (
-            <div className="ProjectManager">
-                <div className="App-header ProjectManager-header">
-                    <h2 className="App-title">Projects</h2>
-                    <div className="ProjectManager-header-buttons">
-                        <Button onClick={createNewProject}>New</Button>
-                        <Button onClick={openExistingProject}>Open</Button>
-                    </div>
-                </div>
-                <div className="ProjectManager-list">
-                    {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
+    let navigateToProject = project => {
+        if (project) {
+            setActiveProject(project)
+            navigate('/project/home')
+        }
+    }
+
+    let deleteRecentProject = async recentProject => {
+        setRecentProjects(await window.projects.deleteRecent(recentProject))
+    }
+
+    let recent = recentProjects.map(recentProject => (
+        <RecentProjectItem project={recentProject} key={recentProject.path}
+                           onOpenClick={openRecentProject} onDeleteClick={deleteRecentProject}
+        />
+    ))
+
+    return (
+        <div className="ProjectManager">
+            <div className="App-header ProjectManager-header">
+                <h2 className="App-title">Projects</h2>
+                <div className="ProjectManager-header-buttons">
+                    <Button onClick={createNewProject}>New</Button>
+                    <Button onClick={openExistingProject}>Open</Button>
                 </div>
             </div>
-        )
-    }
+            <div className="ProjectManager-list">
+                {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
+            </div>
+        </div>
+    )
+
 }

@@ -1,18 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react'
 import "./App.css";
 
-import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import {createMemoryRouter, Outlet, RouterProvider} from 'react-router-dom';
 import ProjectManager from "./components/ProjectManager/ProjectManager";
+import ProjectHome from './components/ProjectHome/ProjectHome'
 
 export default function App() {
+    const [activeProject, setActiveProject] = useState({})
+    console.log('RENDER App')
 
-    const router = createMemoryRouter([
-        {
-            path: "/",
-            element: <ProjectManager />,
-        },
-    ]);
     return (
-        <RouterProvider router={router} />
+        <Outlet context={[activeProject, setActiveProject]} />
     );
 }
