@@ -1,4 +1,4 @@
-import {ipcMain, dialog, BrowserWindow} from "electron";
+import {app, ipcMain, dialog, BrowserWindow} from "electron";
 import {promises as fs} from 'fs';
 const path = require('path');
 import Project from "../model/Project";
@@ -23,8 +23,7 @@ function onCreate() {
                 encoding: 'utf8',
                 mode: 0o600
             }).then(() => {
-                // TODO add to recents and open
-                console.log(filePath)
+                openProject(project)
             })
         }
     })
@@ -35,21 +34,31 @@ function onOpen() {
         filters: [VAMP_FILE_TYPE],
     }).then(res => {
         if (!res.canceled) {
-            let filePath = res.filePaths[0]
-            fs.readFile(filePath, 'utf8').then(text => {
-                let data = JSON.parse(text)
-                let project = Project.from(data)
-                // TODO open
-                console.log(project.name)
-            })
+            openProjectFromFile(res.filePaths[0]);
         }
     })
 }
+function nativeOpen(event, filePath) {
+    event.preventDefault()
 
-// TODO
-function openProject() {
+    openProjectFromFile(filePath)
+}
 
+function openProjectFromFile(filePath) {
+    fs.readFile(filePath, 'utf8').then(text => {
+        let data = JSON.parse(text)
+        let project = Project.from(data)
+        openProject(project)
+    })
+}
+
+function openProject(project) {
+    // TODO figure out what open means
+    app.addRecentDocument(project.path)
+    console.log(project.name)
 }
 
 ipcMain.handle('projects:create', onCreate);
 ipcMain.handle('projects:open', onOpen);
+
+app.on('open-file', nativeOpen)

@@ -1,6 +1,6 @@
 {
   "name": "vamp-lab",
-  "productName": "vamp-lab",
+  "productName": "VampLab",
   "version": "1.0.0",
   "description": "Vamp management software for musical theatre plays",
   "main": ".webpack/main",

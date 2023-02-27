@@ -1,7 +1,6 @@
 import {ipcMain, nativeTheme} from "electron";
 
 const { app, BrowserWindow } = require('electron');
-const path = require('path');
 
 import Store from 'electron-store';
 const store = new Store();
@@ -43,6 +42,12 @@ const createWindow = () => {
   //mainWindow.webContents.openDevTools();
 };
 
+function ensureWindowExists() {
+  if (BrowserWindow.getAllWindows().length === 0) {
+    createWindow();
+  }
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -57,13 +62,11 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('activate', () => {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
+// On OS X it's common to re-create a window in the app when the
+// dock icon is clicked and there are no other windows open.
+app.on('activate', ensureWindowExists);
+app.on('open-file', ensureWindowExists)
+
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
@@ -81,4 +84,5 @@ ipcMain.handle('dark-mode:system', () => {
   nativeTheme.themeSource = 'system'
 });
 
+import './apis/menu'
 import './apis/projects'
