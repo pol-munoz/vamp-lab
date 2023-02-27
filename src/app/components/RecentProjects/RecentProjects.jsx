@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useNavigate, useOutletContext} from 'react-router-dom'
 import './RecentProjects.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
+import {StoreContext} from '../../StoreContext'
 
-export default function RecentProjects(props) {
+export default function RecentProjects() {
     const [recentProjects, setRecentProjects] = useState([])
+    const { state, dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
-    const [_, setActiveProject] = useOutletContext();
-    console.log('RENDER RecentProjects')
 
     useEffect(() => {
         let init = async () => {
@@ -16,7 +16,6 @@ export default function RecentProjects(props) {
         }
         void init()
     }, [])
-
 
     let createNewProject = async () => {
         let project = await window.projects.create()
@@ -35,7 +34,10 @@ export default function RecentProjects(props) {
 
     let navigateToProject = project => {
         if (project) {
-            setActiveProject(project)
+            dispatch({
+                type: 'setActiveProject',
+                payload: project
+            })
             navigate('/project/home')
         }
     }
@@ -52,15 +54,15 @@ export default function RecentProjects(props) {
 
     return (
         <div className="RecentProjects">
-            <div className="App-header RecentProjects-header">
-                <h2 className="App-title">Projects</h2>
+            <div className="Vamp-header RecentProjects-header">
+                <h2 className="Vamp-title">Projects</h2>
                 <div className="RecentProjects-header-buttons">
                     <Button onClick={createNewProject}>New</Button>
                     <Button onClick={openExistingProject}>Open</Button>
                 </div>
             </div>
             <div className="RecentProjects-list">
-                {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
+                {recent.length === 0 ? <p className="Vamp-placeholder">Recent projects will appear here</p> : recent}
             </div>
         </div>
     )

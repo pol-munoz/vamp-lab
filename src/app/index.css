@@ -1,14 +1,14 @@
-.App-title {
+.Vamp-title {
   margin: 0;
 }
 
-.App-placeholder {
+.Vamp-placeholder {
   margin: 2rem;
   opacity: 0.4;
   text-align: center;
 }
 
-.App-header {
+.Vamp-header {
   background: var(--bg-color-light);
   border-bottom: 1px solid var(--border-color);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
