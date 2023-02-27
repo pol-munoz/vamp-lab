@@ -1,14 +1,14 @@
 import React, {useState, useEffect} from 'react'
 import {useNavigate, useOutletContext} from 'react-router-dom'
-import './ProjectManager.css'
+import './RecentProjects.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
 
-export default function ProjectManager(props) {
+export default function RecentProjects(props) {
     const [recentProjects, setRecentProjects] = useState([])
     const navigate = useNavigate()
     const [_, setActiveProject] = useOutletContext();
-    console.log('RENDER ProjectManager')
+    console.log('RENDER RecentProjects')
 
     useEffect(() => {
         let init = async () => {
@@ -51,15 +51,15 @@ export default function ProjectManager(props) {
     ))
 
     return (
-        <div className="ProjectManager">
-            <div className="App-header ProjectManager-header">
+        <div className="RecentProjects">
+            <div className="App-header RecentProjects-header">
                 <h2 className="App-title">Projects</h2>
-                <div className="ProjectManager-header-buttons">
+                <div className="RecentProjects-header-buttons">
                     <Button onClick={createNewProject}>New</Button>
                     <Button onClick={openExistingProject}>Open</Button>
                 </div>
             </div>
-            <div className="ProjectManager-list">
+            <div className="RecentProjects-list">
                 {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
             </div>
         </div>

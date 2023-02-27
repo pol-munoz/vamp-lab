@@ -1,10 +1,10 @@
 import React from 'react'
-import './ProjectHome.css'
+import './ActiveProject.css'
 import {useOutletContext} from 'react-router-dom'
 
-export default function ProjectHome(props) {
+export default function ActiveProject(props) {
     const [project] = useOutletContext();
-    console.log('RENDER ProjectHome')
+    console.log('RENDER ActiveProject')
 
     return (
         <div className="ProjectHome">

@@ -2,8 +2,8 @@ import React from 'react'
 import {createRoot} from 'react-dom/client'
 import App from './App'
 import {createMemoryRouter, RouterProvider} from 'react-router-dom'
-import ProjectManager from './components/ProjectManager/ProjectManager'
-import ProjectHome from './components/ProjectHome/ProjectHome'
+import RecentProjects from './components/RecentProjects/RecentProjects'
+import ActiveProject from './components/ActiveProject/ActiveProject'
 
 function render() {
     const domNode = document.getElementById('root')
@@ -15,11 +15,11 @@ function render() {
             children: [
                 {
                     path: '/',
-                    element: <ProjectManager/>,
+                    element: <RecentProjects/>,
                 },
                 {
                     path: '/project/home',
-                    element: <ProjectHome/>,
+                    element: <ActiveProject/>,
                 },
             ]
         }

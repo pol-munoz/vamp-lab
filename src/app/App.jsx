@@ -1,9 +1,7 @@
 import React, {useState} from 'react'
-import "./App.css";
+import "./App.css"
 
-import {createMemoryRouter, Outlet, RouterProvider} from 'react-router-dom';
-import ProjectManager from "./components/ProjectManager/ProjectManager";
-import ProjectHome from './components/ProjectHome/ProjectHome'
+import {Outlet} from 'react-router-dom'
 
 export default function App() {
     const [activeProject, setActiveProject] = useState({})
@@ -11,5 +9,5 @@ export default function App() {
 
     return (
         <Outlet context={[activeProject, setActiveProject]} />
-    );
+    )
 }
