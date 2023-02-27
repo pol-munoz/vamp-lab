@@ -1,9 +1,9 @@
 export default class Song {
     constructor(name) {
-        this.name = name;
+        this.name = name
         // Track[]
-        this.tracks = [];
+        this.tracks = []
         // Segment[]
-        this.segments = [];
+        this.segments = []
     }
 }

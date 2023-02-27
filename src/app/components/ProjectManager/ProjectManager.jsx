@@ -1,6 +1,9 @@
-import * as React from 'react';
-import "./ProjectManager.css";
-import Button from "../../../components/Button/Button";
+import React from 'react'
+import './ProjectManager.css'
+import {RECENT_PROJECTS_STORE_KEY} from '../../../apis/keys'
+import RecentProject from '../../../model/RecentProject'
+import Button from '../../../components/Button/Button'
+import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
 
 function createNewProject() {
     window.projects.create()
@@ -11,7 +14,10 @@ function openExistingProject() {
 }
 
 export default function ProjectManager() {
-    let recent = []
+    let recentData = RecentProject.fromArray(window.electron.store.get(RECENT_PROJECTS_STORE_KEY))
+    let recent = recentData.map(recentProject => (
+        <RecentProjectItem project={recentProject} />
+    ))
 
     return (
         <div className="ProjectManager">
@@ -26,5 +32,5 @@ export default function ProjectManager() {
                 {recent.length === 0 ? <p className="App-placeholder">Recent projects will appear here</p> : recent}
             </div>
         </div>
-    );
+    )
 }
