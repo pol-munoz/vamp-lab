@@ -16,7 +16,7 @@
     "name": "pulmunyi",
     "email": "pol.munoz@salle.url.edu"
   },
-  "license": "GNUv3",
+  "license": "GPL-3.0-only",
   "devDependencies": {
     "@babel/core": "^7.21.0",
     "@babel/preset-react": "^7.18.6",
@@ -35,6 +35,7 @@
     "style-loader": "^3.0.0"
   },
   "dependencies": {
+    "custom-electron-prompt": "^1.5.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.1.0",
     "immer": "^9.0.19",

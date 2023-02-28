@@ -83,3 +83,4 @@ ipcMain.handle('dark-mode:system', () => {
 // Other configuration, to avoid clutter in this file
 import './apis/menu'
 import './apis/projects'
+import './apis/activeProject'

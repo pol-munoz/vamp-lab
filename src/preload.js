@@ -14,3 +14,8 @@ contextBridge.exposeInMainWorld('projects', {
     deleteRecent: recentProject => ipcRenderer.invoke('projects:deleteRecent', recentProject),
     getRecent: () => ipcRenderer.invoke('projects:getRecent'),
 })
+
+contextBridge.exposeInMainWorld('activeProject', {
+    save: project => ipcRenderer.send('activeProject:save'),
+    promptSongName: () => ipcRenderer.invoke('activeProject:promptSongName'),
+})

@@ -5,6 +5,7 @@ import {addReducer} from '../../RootReducer'
 import {useNavigate} from 'react-router-dom'
 import {activeProjectReducer} from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
+import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 
 addReducer(activeProjectReducer)
@@ -12,7 +13,26 @@ export default function ActiveProject() {
     const { state, dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
 
-    let songs = []
+    let addSong = async () => {
+        let name = await window.activeProject.promptSongName()
+
+        if (!!name && !!name.trim()) {
+            console.log(name)
+        }
+    }
+
+    let openSong = song => {
+
+    }
+
+    let deleteSong = song => {
+
+    }
+
+    let songs = state.activeProject?.songs?.map(song => (
+        <SongItem key={song.name} song={song}
+                  onOpenClick={openSong} onDeleteClick={deleteSong} />
+    )) ?? []
 
     return (
         <div className="Vamp-screen">
@@ -24,7 +44,7 @@ export default function ActiveProject() {
                     </Button>
                     <h3 className="Vamp-title">{state.activeProject.name} - Songs</h3>
                 </div>
-                <Button onClick={() => {}}>
+                <Button onClick={addSong}>
                     Add
                 </Button>
             </div>

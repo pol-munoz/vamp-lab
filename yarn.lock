@@ -2678,6 +2678,11 @@ csso@^4.2.0:
   dependencies:
     css-tree "^1.1.2"
 
+custom-electron-prompt@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/custom-electron-prompt/-/custom-electron-prompt-1.5.1.tgz#24a63a7829c2ebcd2d898a312f9dff65785c2da7"
+  integrity sha512-d/az6lkIdnBUf3TwQNP1sW5Jpe5PWw5xklC4F8B7/5t0RdH1OUwqO7Z/NyX7+2Iq/fyuXMiwkQxRQCqEjzIYZw==
+
 debounce-fn@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/debounce-fn/-/debounce-fn-4.0.0.tgz#ed76d206d8a50e60de0dd66d494d82835ffe61c7"

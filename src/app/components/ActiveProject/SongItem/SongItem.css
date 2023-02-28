@@ -4,6 +4,7 @@
   display: grid;
   grid-template:  "name delete" auto /
                   1fr auto;
+  gap: 0.5em;
 }
 
 .SongItem:hover {
@@ -11,7 +12,7 @@
 }
 
 .SongItem-name {
-  margin: 0 0 0.5em;
+  margin: 0;
   grid-area: name;
 }
 

@@ -1,10 +1,9 @@
 import {app, ipcMain, dialog, BrowserWindow} from 'electron'
 import {promises as fs} from 'fs'
 import path from 'path'
-
 import Project from '../model/Project'
-import {RECENT_PROJECTS_STORE_KEY, store} from './store'
 import RecentProject from '../model/RecentProject'
+import {RECENT_PROJECTS_STORE_KEY, store} from './store'
 
 const VAMP_FILE_TYPE = {
     name: 'Vamp Project',
@@ -83,7 +82,7 @@ function onDeleteRecent(event, recentProject) {
     return recentProjects
 }
 
-async function getRecent() {
+function getRecent() {
     return RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
 }
 
