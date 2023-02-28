@@ -56,7 +56,7 @@ export default function RecentProjects() {
         <div className="Vamp-screen">
             <div className="Vamp-header">
                 <h2 className="Vamp-title">Projects</h2>
-                <div className="Vamp-header-buttons">
+                <div className="Vamp-header-pack">
                     <Button onClick={createNewProject}>New</Button>
                     <Button onClick={openExistingProject}>Open</Button>
                 </div>

@@ -20,9 +20,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-height: 4rem;
 }
 
-.Vamp-header-buttons {
+.Vamp-header-pack {
   display: flex;
   flex-direction: row;
   align-items: center;

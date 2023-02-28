@@ -1,6 +1,5 @@
 import {app, BrowserWindow, ipcMain, nativeTheme} from 'electron'
 
-
 import {BOUNDS_STORE_KEY, store} from './apis/store'
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

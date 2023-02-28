@@ -1,6 +1,7 @@
 import React from 'react'
 import './RecentProjectItem.css'
 import Button from '../../../../components/Button/Button'
+import XAlt from '../../../../../resources/icons/xAlt.svg'
 
 export default function RecentProjectItem(props) {
     return (
@@ -12,7 +13,7 @@ export default function RecentProjectItem(props) {
                         event.stopPropagation()
                         props.onDeleteClick(props.project)
                     }}>
-                ×
+                <XAlt />
             </Button>
         </div>
     )
