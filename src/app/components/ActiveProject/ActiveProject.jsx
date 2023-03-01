@@ -17,7 +17,7 @@ export default function ActiveProject() {
         if (!!name && !!name.trim()) {
             dispatch({
                 type: ADD_SONG_TO_ACTIVE_PROJECT,
-                payload: name
+                payload: {name}
             })
         }
     }
@@ -27,9 +27,10 @@ export default function ActiveProject() {
     }
 
     let deleteSong = song => {
+        let name = song.name
         dispatch({
             type: REMOVE_SONG_FROM_ACTIVE_PROJECT,
-            payload: song.name
+            payload: {name}
         })
     }
 

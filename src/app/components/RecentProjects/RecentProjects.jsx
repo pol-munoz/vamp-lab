@@ -16,7 +16,7 @@ export default function RecentProjects() {
         if (project) {
             dispatch({
                 type: SET_ACTIVE_PROJECT,
-                payload: project
+                payload: {project}
             })
             navigate('/project/home')
         }

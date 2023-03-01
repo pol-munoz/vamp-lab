@@ -4,15 +4,15 @@ import {addReducer, addStateReactor} from '../../RootReducer'
 const activeProjectReducer = (draft, action) => {
     switch (action.type) {
         case SET_ACTIVE_PROJECT: {
-            draft.activeProject = action.payload
+            draft.activeProject = action.payload.project
             break
         }
         case ADD_SONG_TO_ACTIVE_PROJECT: {
-            draft.activeProject.songs.push(new Song(action.payload))
+            draft.activeProject.songs.push(new Song(action.payload.name))
             break
         }
         case REMOVE_SONG_FROM_ACTIVE_PROJECT: {
-            const index = draft.activeProject.songs.findIndex(song => song.name === action.payload)
+            const index = draft.activeProject.songs.findIndex(song => song.name === action.payload.name)
             if (index !== -1) {
                 draft.activeProject.songs.splice(index, 1)
             }
