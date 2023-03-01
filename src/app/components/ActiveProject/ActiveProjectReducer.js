@@ -14,7 +14,7 @@ const activeProjectReducer = (draft, action) => {
         case REMOVE_SONG_FROM_ACTIVE_PROJECT: {
             const index = draft.activeProject.songs.findIndex(song => song.name === action.payload)
             if (index !== -1) {
-                draft.splice(index, 1)
+                draft.activeProject.songs.splice(index, 1)
             }
             break
         }
