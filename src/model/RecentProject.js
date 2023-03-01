@@ -1,5 +1,6 @@
 export default class RecentProject {
-    constructor(name, path) {
+    constructor(id, name, path) {
+        this.id = id
         this.name = name;
         this.path = path;
         this.lastOpened = new Date().getTime()

@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('projects', {
     nativeOpenSubscribe: callback => ipcRenderer.on('projects:nativeOpen', callback),
     nativeOpenUnSubscribe: () => ipcRenderer.removeAllListeners('projects:nativeOpen'),
     openRecent: recentProject => ipcRenderer.invoke('projects:openRecent', recentProject),
-    deleteRecent: recentProject => ipcRenderer.invoke('projects:deleteRecent', recentProject),
+    removeRecent: recentProject => ipcRenderer.invoke('projects:removeRecent', recentProject),
     getRecent: () => ipcRenderer.invoke('projects:getRecent'),
 })
 

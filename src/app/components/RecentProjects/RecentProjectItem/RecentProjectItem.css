@@ -25,7 +25,7 @@
   grid-area: path;
 }
 
-.RecentProjectItem-delete {
+.RecentProjectItem-remove {
   grid-area: delete;
   font-size: 1.2rem;
 }

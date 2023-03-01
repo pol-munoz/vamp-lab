@@ -47,13 +47,13 @@ export default function RecentProjects() {
         navigateToProject(project)
     }
 
-    let deleteRecentProject = async recentProject => {
-        setRecentProjects(await window.projects.deleteRecent(recentProject))
+    let removeRecentProject = async recentProject => {
+        setRecentProjects(await window.projects.removeRecent(recentProject))
     }
 
     let recent = recentProjects.map(recentProject => (
-        <RecentProjectItem project={recentProject} key={recentProject.path}
-                           onOpenClick={openRecentProject} onDeleteClick={deleteRecentProject}
+        <RecentProjectItem project={recentProject} key={recentProject.id}
+                           onOpenClick={openRecentProject} onRemoveClick={removeRecentProject}
         />
     ))
 

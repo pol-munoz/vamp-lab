@@ -16,7 +16,7 @@ function openProject(project) {
     app.addRecentDocument(project.path)
 
     // Update "internal" recent projects
-    let recentProject = new RecentProject(project.name, project.path)
+    let recentProject = new RecentProject(project.id, project.name, project.path)
     let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
     recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
     recentProjects = [recentProject, ...recentProjects]
@@ -77,7 +77,7 @@ async function onOpenRecent(_, recentProject) {
     return await openProjectFromFile(recentProject.path)
 }
 
-function onDeleteRecent(_, recentProject) {
+function onRemoveRecent(_, recentProject) {
     let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
     recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
     store.set(RECENT_PROJECTS_STORE_KEY, recentProjects)
@@ -92,7 +92,7 @@ app.whenReady().then(() => {
     ipcMain.handle('projects:create', onCreate)
     ipcMain.handle('projects:open', onOpen)
     ipcMain.handle('projects:openRecent', onOpenRecent)
-    ipcMain.handle('projects:deleteRecent', onDeleteRecent)
+    ipcMain.handle('projects:removeRecent', onRemoveRecent)
     ipcMain.handle('projects:getRecent', getRecent)
 })
 

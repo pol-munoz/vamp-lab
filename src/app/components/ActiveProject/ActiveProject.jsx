@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import './ActiveProject.css'
 import { StoreContext } from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
-import {ADD_SONG_TO_ACTIVE_PROJECT, REMOVE_SONG_FROM_ACTIVE_PROJECT} from './ActiveProjectReducer'
+import {ADD_SONG_TO_ACTIVE_PROJECT, DELETE_SONG_FROM_ACTIVE_PROJECT} from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
 import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
@@ -27,17 +27,22 @@ export default function ActiveProject() {
     }
 
     let deleteSong = song => {
-        let name = song.name
+        let id = song.id
         dispatch({
-            type: REMOVE_SONG_FROM_ACTIVE_PROJECT,
-            payload: {name}
+            type: DELETE_SONG_FROM_ACTIVE_PROJECT,
+            payload: {id}
         })
     }
 
-    let songs = state.activeProject?.songs?.map(song => (
-        <SongItem key={song.name} song={song}
-                  onOpenClick={openSong} onDeleteClick={deleteSong} />
-    )) ?? []
+
+
+    let songs = Object.entries(state.activeProject?.songs).map(entry => {
+        const [_, song] = entry
+        return (
+            <SongItem key={song.id} song={song}
+                      onOpenClick={openSong} onDeleteClick={deleteSong} />
+        )
+    }) ?? []
 
     return (
         <div className="Vamp-screen">

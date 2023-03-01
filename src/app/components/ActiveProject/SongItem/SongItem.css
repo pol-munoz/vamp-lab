@@ -17,7 +17,7 @@
   grid-area: name;
 }
 
-.RecentProjectItem-delete {
+.SongItem-delete {
   grid-area: delete;
   font-size: 1.2rem;
 }

@@ -8,10 +8,10 @@ export default function RecentProjectItem(props) {
         <div className="Vamp-screen-list-item RecentProjectItem" onClick={() => props.onOpenClick(props.project)}>
             <p className="RecentProjectItem-name">{props.project.name}</p>
             <p className="RecentProjectItem-path">{props.project.path}</p>
-            <Button className="RecentProjectItem-delete" transparent round
+            <Button className="RecentProjectItem-remove" transparent round
                     onClick={event => {
                         event.stopPropagation()
-                        props.onDeleteClick(props.project)
+                        props.onRemoveClick(props.project)
                     }}>
                 <XAlt />
             </Button>
