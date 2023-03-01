@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import './ActiveProject.css'
 import { StoreContext } from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
-import {ADD_SONG_TO_ACTIVE_PROJECT} from './ActiveProjectReducer'
+import {ADD_SONG_TO_ACTIVE_PROJECT, REMOVE_SONG_FROM_ACTIVE_PROJECT} from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
 import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
@@ -27,7 +27,10 @@ export default function ActiveProject() {
     }
 
     let deleteSong = song => {
-
+        dispatch({
+            type: REMOVE_SONG_FROM_ACTIVE_PROJECT,
+            payload: song.name
+        })
     }
 
     let songs = state.activeProject?.songs?.map(song => (

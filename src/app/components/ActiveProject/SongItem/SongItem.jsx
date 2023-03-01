@@ -11,7 +11,7 @@ export default function SongItem(props) {
             <Button className="SongItem-delete" transparent round
                     onClick={event => {
                         event.stopPropagation()
-                        props.onDeleteClick(props.project)
+                        props.onDeleteClick(props.song)
                     }}>
                 <Bin />
             </Button>
