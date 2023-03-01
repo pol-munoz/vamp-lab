@@ -1,6 +1,7 @@
 import Song from '../../../model/Song'
+import {addReducer, addStateReactor} from '../../RootReducer'
 
-export const activeProjectReducer = (draft, action) => {
+const activeProjectReducer = (draft, action) => {
     switch (action.type) {
         case SET_ACTIVE_PROJECT: {
             draft.activeProject = action.payload
@@ -21,9 +22,18 @@ export const activeProjectReducer = (draft, action) => {
             break
         }
     }
-};
+}
+const activeProjectStateReactor = (newState, action) => {
+    if (action.type.startsWith(PERSIST_ACTIVE_PROJECT_ACTION)) {
+        window.activeProject.save(newState.activeProject)
+    }
+}
 
+addReducer(activeProjectReducer)
+addStateReactor(activeProjectStateReactor)
+
+const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
 
 export const SET_ACTIVE_PROJECT = 'setActiveProject'
-export const ADD_SONG_TO_ACTIVE_PROJECT = 'addSongToActiveProject'
-export const REMOVE_SONG_FROM_ACTIVE_PROJECT = 'removeSongFromActiveProject'
+export const ADD_SONG_TO_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'addSongToActiveProject'
+export const REMOVE_SONG_FROM_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'removeSongFromActiveProject'

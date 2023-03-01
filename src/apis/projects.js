@@ -73,11 +73,11 @@ async function nativeOpen(event, filePath) {
     return project
 }
 
-async function onOpenRecent(event, recentProject) {
+async function onOpenRecent(_, recentProject) {
     return await openProjectFromFile(recentProject.path)
 }
 
-function onDeleteRecent(event, recentProject) {
+function onDeleteRecent(_, recentProject) {
     let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
     recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
     store.set(RECENT_PROJECTS_STORE_KEY, recentProjects)

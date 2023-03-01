@@ -1,16 +1,28 @@
-import { useImmerReducer } from 'use-immer'
+import {useReducer} from 'react'
+import produce from 'immer'
 
 const childReducers = []
+const stateReactors = []
 
-const rootReducer = (draft, action) => {
+const innerRootReducer = produce((draft, action) => {
     childReducers.forEach(reducer => {
         draft = reducer(draft, action);
     })
     return draft
+})
+
+const rootReducer = (state, action) => {
+    let nextState = innerRootReducer(state, action)
+    stateReactors.forEach(reactor => reactor(nextState, action))
+    return nextState
 }
 
 export const addReducer = reducer => {
     childReducers.push(reducer)
+}
+
+export const addStateReactor = reactor => {
+    stateReactors.push(reactor)
 }
 
 export const removeReducer = reducer => {
@@ -19,6 +31,6 @@ export const removeReducer = reducer => {
 }
 
 export const useRootReducer = initialState => {
-    const [state, dispatch] = useImmerReducer(rootReducer, initialState)
+    const [state, dispatch] = useReducer(rootReducer, initialState)
     return [state, dispatch];
 }

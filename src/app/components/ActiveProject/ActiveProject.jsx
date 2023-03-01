@@ -1,14 +1,12 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import './ActiveProject.css'
 import { StoreContext } from '../../StoreContext'
-import {addReducer} from '../../RootReducer'
 import {useNavigate} from 'react-router-dom'
-import {activeProjectReducer, ADD_SONG_TO_ACTIVE_PROJECT, SET_ACTIVE_PROJECT} from './ActiveProjectReducer'
+import {ADD_SONG_TO_ACTIVE_PROJECT} from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
 import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 
-addReducer(activeProjectReducer)
 export default function ActiveProject() {
     const { state, dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
@@ -21,7 +19,6 @@ export default function ActiveProject() {
                 type: ADD_SONG_TO_ACTIVE_PROJECT,
                 payload: name
             })
-            window.activeProject.save()
         }
     }
 

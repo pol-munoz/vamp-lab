@@ -4,8 +4,10 @@ const prompt = __non_webpack_require__('custom-electron-prompt')
 import {promises as fs} from 'fs'
 
 
-async function saveActiveProject(project) {
-    void fs.writeFile(project.path, project,  {
+async function saveActiveProject(_, project) {
+    let json = JSON.stringify(project, null, 2)
+    console.log(json)
+    void fs.writeFile(project.path, json,  {
         encoding: 'utf8',
         mode: 0o600
     })

@@ -18,7 +18,7 @@ contextBridge.exposeInMainWorld('projects', {
 })
 
 contextBridge.exposeInMainWorld('activeProject', {
-    save: project => ipcRenderer.send('activeProject:save'),
+    save: project => ipcRenderer.send('activeProject:save', project),
     promptSongName: () => ipcRenderer.invoke('activeProject:promptSongName'),
     promptConfirmDeleteSong: () => ipcRenderer.invoke('activeProject:promptConfirmDeleteSong'),
 })
