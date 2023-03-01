@@ -6,7 +6,7 @@ import Button from '../../../../components/Button/Button'
 
 export default function SongItem(props) {
     return (
-        <div className="SongItem" onClick={() => props.onOpenClick(props.song)}>
+        <div className="Vamp-screen-list-item SongItem" onClick={() => props.onOpenClick(props.song)}>
             <p className="SongItem-name">{props.song.name}</p>
             <Button className="SongItem-delete" transparent round
                     onClick={event => {

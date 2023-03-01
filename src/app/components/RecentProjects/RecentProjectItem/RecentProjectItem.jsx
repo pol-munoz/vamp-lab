@@ -5,7 +5,7 @@ import XAlt from '../../../../../resources/icons/xAlt.svg'
 
 export default function RecentProjectItem(props) {
     return (
-        <div className="RecentProjectItem" onClick={() => props.onOpenClick(props.project)}>
+        <div className="Vamp-screen-list-item RecentProjectItem" onClick={() => props.onOpenClick(props.project)}>
             <p className="RecentProjectItem-name">{props.project.name}</p>
             <p className="RecentProjectItem-path">{props.project.path}</p>
             <Button className="RecentProjectItem-delete" transparent round

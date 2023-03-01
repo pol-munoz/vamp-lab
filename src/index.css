@@ -21,8 +21,9 @@ html, body, #root {
 @media (prefers-color-scheme: dark) {
   html {
     --bg-color: #3f3330;
+    --border-color: #4f4340;
     --bg-color-light: #4e3e3b;
-    --border-color: #5e4e4b;
+    --border-color-light: #5e4e4b;
     --text-color: white;
   }
 }
@@ -30,8 +31,9 @@ html, body, #root {
 @media (prefers-color-scheme: light) {
   html {
     --bg-color: #dfd3d0;
+    --border-color: #efe3e0;
     --bg-color-light: #f3efef;
+    --border-color-light: #e3dede;
     --text-color: black;
-    --border-color: #e3dede;
   }
 }
