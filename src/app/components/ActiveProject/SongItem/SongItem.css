@@ -1,15 +1,10 @@
 .SongItem {
-  cursor: pointer;
   padding: 1em;
   display: grid;
   grid-template:  "name delete" auto /
                   1fr auto;
   gap: 0.5em;
   align-items: center;
-}
-
-.SongItem:hover {
-  background: rgba(255, 128, 128, 0.1);
 }
 
 .SongItem-name {

@@ -10,6 +10,7 @@ const activeProjectReducer = (draft, action) => {
         case ADD_SONG_TO_ACTIVE_PROJECT: {
             let song = new Song(action.payload.name)
             draft.activeProject.songs[song.id] = song
+            draft.activeSongId = song.id
             break
         }
         case DELETE_SONG_FROM_ACTIVE_PROJECT: {

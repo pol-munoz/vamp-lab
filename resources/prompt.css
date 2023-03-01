@@ -2,9 +2,10 @@
 
 @media (prefers-color-scheme: dark) {
   html {
-    --bg-color: #3f3330;
-    --bg-color-light: #4e3e3b;
-    --border-color: #5e4e4b;
+    --bg-color: #382e30;
+    --border-color: #4e4043;
+    --bg-color-light: #483b3d;
+    --border-color-light: #5c4c4e;
     --text-color: white;
   }
 }
@@ -12,9 +13,10 @@
 @media (prefers-color-scheme: light) {
   html {
     --bg-color: #dfd3d0;
+    --border-color: #efe3e0;
     --bg-color-light: #f3efef;
+    --border-color-light: #e3dede;
     --text-color: black;
-    --border-color: #e3dede;
   }
 }
 
@@ -39,6 +41,7 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
   margin: 0;
+  --primary: #e24462;
 }
 
 #container {
@@ -71,7 +74,7 @@ input:hover {
 }
 
 input:focus {
-  outline: 2px solid #dc334a;
+  outline: 2px solid var(--primary);
   box-shadow: 0 4px 8px rgb(0, 0, 0, 0.3);
 }
 
@@ -85,7 +88,7 @@ input:focus {
 }
 
 #ok {
-  background: #dc334a;
+  background: var(--primary);
   color: white;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
 }

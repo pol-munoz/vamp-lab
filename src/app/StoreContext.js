@@ -7,7 +7,8 @@ export const StoreContext = React.createContext({})
 
 const initialState = {
     recentProjects: [],
-    activeProject: new Project()
+    activeProject: new Project(),
+    activeSongId: '',
 }
 
 const StoreProvider = (props) => {

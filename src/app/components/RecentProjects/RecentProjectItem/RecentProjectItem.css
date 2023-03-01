@@ -10,7 +10,7 @@
 }
 
 .RecentProjectItem:hover {
-  background: rgba(255, 128, 128, 0.1);
+  background: rgba(240, 161, 176, 0.05);
 }
 
 .RecentProjectItem-name {

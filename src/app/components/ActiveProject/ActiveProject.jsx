@@ -19,6 +19,7 @@ export default function ActiveProject() {
                 type: ADD_SONG_TO_ACTIVE_PROJECT,
                 payload: {name}
             })
+            // TODO navigate to song
         }
     }
 

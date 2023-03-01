@@ -7,7 +7,7 @@
 }
 
 .Button {
-  background: #dc334a;
+  background: var(--primary);
   color: white;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
 }
@@ -53,4 +53,13 @@
   aspect-ratio: 1;
   min-width: 2rem;
   display: flex;
+}
+
+.Button-transparent-destructive {
+  opacity: 1;
+  color: var(--destructive);
+}
+
+.Button-transparent-destructive:not([disabled]):hover, .Button-transparent-destructive:not([disabled]):focus {
+  background: rgba(220, 51, 70, 0.3);
 }

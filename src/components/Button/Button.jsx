@@ -7,10 +7,14 @@ export default function Button(props) {
 
     if (props.transparent) {
         className += '-transparent'
+        if (props.destructive) {
+            className += ' Button-transparent-destructive'
+        }
     }
     if (props.round) {
         className += ' Button-round'
     }
+
 
     if (props.className) {
         className += ` ${props.className}`
