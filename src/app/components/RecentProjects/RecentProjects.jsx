@@ -4,17 +4,32 @@ import './RecentProjects.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
 import {StoreContext} from '../../StoreContext'
+import {SET_ACTIVE_PROJECT} from '../ActiveProject/ActiveProjectReducer'
 
 export default function RecentProjects() {
     const [recentProjects, setRecentProjects] = useState([])
     const { dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
 
+
+    let navigateToProject = project => {
+        if (project) {
+            dispatch({
+                type: SET_ACTIVE_PROJECT,
+                payload: project
+            })
+            navigate('/project/home')
+        }
+    }
+
     useEffect(() => {
         let init = async () => {
             setRecentProjects(await window.projects.getRecent())
         }
         void init()
+        window.projects.nativeOpenSubscribe((_, data) => navigateToProject(data))
+
+        return () => window.projects.nativeOpenUnSubscribe()
     }, [])
 
     let createNewProject = async () => {
@@ -30,16 +45,6 @@ export default function RecentProjects() {
     let openRecentProject = async recentProject => {
         let project = await window.projects.openRecent(recentProject)
         navigateToProject(project)
-    }
-
-    let navigateToProject = project => {
-        if (project) {
-            dispatch({
-                type: 'setActiveProject',
-                payload: project
-            })
-            navigate('/project/home')
-        }
     }
 
     let deleteRecentProject = async recentProject => {

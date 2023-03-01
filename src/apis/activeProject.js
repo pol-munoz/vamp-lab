@@ -11,15 +11,21 @@ async function saveActiveProject(project) {
     })
 }
 async function promptSongName() {
-
     return await prompt({
         title: "Enter the song's name",
         label: "Enter the song's name:",
         customStylesheet: 'resources/prompt.css',
     }, BrowserWindow.getFocusedWindow())
-
+}
+async function promptConfirmDeleteSong() {
+    return await prompt({
+        title: "Enter the song's name",
+        label: "Enter the song's name:",
+        customStylesheet: 'resources/prompt.css',
+    }, BrowserWindow.getFocusedWindow())
 }
 app.whenReady().then(() => {
     ipcMain.on('activeProject:save', saveActiveProject)
     ipcMain.handle('activeProject:promptSongName', promptSongName)
+    ipcMain.handle('activeProject:promptConfirmDeleteSong', promptConfirmDeleteSong)
 })

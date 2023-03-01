@@ -6,6 +6,7 @@
                   "path delete" auto /
                   1fr auto;
   gap: 0.5em;
+  align-items: center;
 }
 
 .RecentProjectItem:hover {
@@ -26,6 +27,5 @@
 
 .RecentProjectItem-delete {
   grid-area: delete;
-  align-self: center;
   font-size: 1.2rem;
 }

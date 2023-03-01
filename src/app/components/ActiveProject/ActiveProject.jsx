@@ -3,7 +3,7 @@ import './ActiveProject.css'
 import { StoreContext } from '../../StoreContext'
 import {addReducer} from '../../RootReducer'
 import {useNavigate} from 'react-router-dom'
-import {activeProjectReducer} from './ActiveProjectReducer'
+import {activeProjectReducer, ADD_SONG_TO_ACTIVE_PROJECT, SET_ACTIVE_PROJECT} from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
 import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
@@ -17,7 +17,11 @@ export default function ActiveProject() {
         let name = await window.activeProject.promptSongName()
 
         if (!!name && !!name.trim()) {
-            console.log(name)
+            dispatch({
+                type: ADD_SONG_TO_ACTIVE_PROJECT,
+                payload: name
+            })
+            window.activeProject.save()
         }
     }
 

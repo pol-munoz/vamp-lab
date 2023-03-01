@@ -68,7 +68,9 @@ async function onOpen() {
 async function nativeOpen(event, filePath) {
     event.preventDefault()
 
-    return await openProjectFromFile(filePath)
+    let project = await openProjectFromFile(filePath)
+    BrowserWindow.getFocusedWindow().webContents.send('projects:nativeOpen', project)
+    return project
 }
 
 async function onOpenRecent(event, recentProject) {

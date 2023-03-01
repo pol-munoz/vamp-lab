@@ -1,12 +1,13 @@
 import React from 'react'
 
 import { useRootReducer } from './RootReducer'
+import Project from '../model/Project'
 
 export const StoreContext = React.createContext({})
 
 const initialState = {
     recentProjects: [],
-    activeProject: {}
+    activeProject: new Project()
 }
 
 const StoreProvider = (props) => {
