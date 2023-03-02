@@ -17,6 +17,10 @@ const activeProjectReducer = (draft, action) => {
             delete draft.activeProject.songs[action.payload.id]
             break
         }
+        case RENAME_SONG_IN_ACTIVE_PROJECT: {
+            draft.activeProject.songs[action.payload.id].name = action.payload.name
+            break
+        }
         default: {
             break
         }
@@ -35,4 +39,5 @@ const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
 
 export const SET_ACTIVE_PROJECT = 'setActiveProject'
 export const ADD_SONG_TO_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'addSongToActiveProject'
+export const RENAME_SONG_IN_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'renameSongInActiveProject'
 export const DELETE_SONG_FROM_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'deleteSongFromActiveProject'

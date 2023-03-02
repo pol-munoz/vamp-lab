@@ -1,7 +1,7 @@
 .SongItem {
   padding: 1em;
   display: grid;
-  grid-template:  "name delete" auto /
+  grid-template:  "name buttons" auto /
                   1fr auto;
   gap: 0.5em;
   align-items: center;
@@ -12,7 +12,9 @@
   grid-area: name;
 }
 
-.SongItem-delete {
-  grid-area: delete;
-  font-size: 1.2rem;
+.SongItem-action {
+  transform: scale(1.2);
+}
+.SongItem-action:not([disabled]):active {
+  transform: scale(1.1);
 }

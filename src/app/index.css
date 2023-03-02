@@ -23,7 +23,7 @@
   min-height: 4rem;
 }
 
-.Vamp-header-pack {
+.Vamp-row {
   display: flex;
   flex-direction: row;
   align-items: center;

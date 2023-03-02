@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import './ActiveProject.css'
 import { StoreContext } from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
-import {ADD_SONG_TO_ACTIVE_PROJECT, DELETE_SONG_FROM_ACTIVE_PROJECT} from './ActiveProjectReducer'
+import {ADD_SONG_TO_ACTIVE_PROJECT, DELETE_SONG_FROM_ACTIVE_PROJECT, RENAME_SONG_IN_ACTIVE_PROJECT}  from './ActiveProjectReducer'
 import Button from '../../../components/Button/Button'
 import SongItem from './SongItem/SongItem'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
@@ -19,20 +19,38 @@ export default function ActiveProject() {
                 type: ADD_SONG_TO_ACTIVE_PROJECT,
                 payload: {name}
             })
-            // TODO navigate to song
+            // TODO navigate to song edit
+        }
+    }
+    let renameSong = async song => {
+        let name = await window.activeProject.promptSongRename(song.name)
+        let id = song.id
+
+        if (!!name && !!name.trim()) {
+            dispatch({
+                type: RENAME_SONG_IN_ACTIVE_PROJECT,
+                payload: {id, name}
+            })
         }
     }
 
-    let openSong = song => {
+    let playSong = song => {
 
     }
 
-    let deleteSong = song => {
-        let id = song.id
-        dispatch({
-            type: DELETE_SONG_FROM_ACTIVE_PROJECT,
-            payload: {id}
-        })
+    let editSong = song => {
+
+    }
+
+    let deleteSong = async song => {
+        let confirm = await window.activeProject.promptConfirmDeleteSong(song.name)
+        if (confirm) {
+            let id = song.id
+            dispatch({
+                type: DELETE_SONG_FROM_ACTIVE_PROJECT,
+                payload: {id}
+            })
+        }
     }
 
 
@@ -41,14 +59,14 @@ export default function ActiveProject() {
         const [_, song] = entry
         return (
             <SongItem key={song.id} song={song}
-                      onOpenClick={openSong} onDeleteClick={deleteSong} />
+                      onPlayClick={playSong} onEditClick={editSong} onDeleteClick={deleteSong} onRenameClick={renameSong} />
         )
     }) ?? []
 
     return (
         <div className="Vamp-screen">
             <div className="Vamp-header">
-                <div className="Vamp-header-pack">
+                <div className="Vamp-row">
                     <Button className="ActiveProject-back" transparent round
                             onClick={() => navigate(-1)} >
                         <ChevronLeft />

@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 
-.Button:not([disabled]):hover, .Button:not([disabled]):focus {
+.Button:not([disabled]):hover, .Button:not([disabled]):focus-visible {
   filter: brightness(1.1);
   transform: scale(1.05);
   box-shadow: 0 2px 3px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.3);
@@ -42,9 +42,12 @@
   opacity: 0.2;
 }
 
-.Button-transparent:not([disabled]):hover, .Button-transparent:not([disabled]):focus {
+.Button-transparent:not([disabled]):hover, .Button-transparent:not([disabled]):focus-visible {
   opacity: 1;
   background: rgba(255, 128, 128, 0.2);
+}
+.Button-transparent:not([disabled]):active {
+  transform: scale(0.9);
 }
 
 .Button-round {
@@ -60,6 +63,6 @@
   color: var(--destructive);
 }
 
-.Button-transparent-destructive:not([disabled]):hover, .Button-transparent-destructive:not([disabled]):focus {
+.Button-transparent-destructive:not([disabled]):hover, .Button-transparent-destructive:not([disabled]):focus-visible {
   background: rgba(220, 51, 70, 0.3);
 }
