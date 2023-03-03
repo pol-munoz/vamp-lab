@@ -11,8 +11,8 @@ export default function ActiveProject() {
     const { state, dispatch } = useContext(StoreContext)
     const navigate = useNavigate()
 
-    let addSong = async () => {
-        let name = await window.activeProject.promptSongName()
+    const addSong = async () => {
+        const name = await window.activeProject.promptSongName()
 
         if (!!name && !!name.trim()) {
             dispatch({
@@ -22,9 +22,9 @@ export default function ActiveProject() {
             // TODO navigate to song edit
         }
     }
-    let renameSong = async song => {
-        let name = await window.activeProject.promptSongRename(song.name)
-        let id = song.id
+    const renameSong = async song => {
+        const name = await window.activeProject.promptSongRename(song.name)
+        const id = song.id
 
         if (!!name && !!name.trim()) {
             dispatch({
@@ -34,18 +34,18 @@ export default function ActiveProject() {
         }
     }
 
-    let playSong = song => {
-
+    const playSong = song => {
+        // TODO navigate to song play
     }
 
-    let editSong = song => {
-
+    const editSong = song => {
+        // TODO navigate to song edit
     }
 
-    let deleteSong = async song => {
-        let confirm = await window.activeProject.promptConfirmDeleteSong(song.name)
+    const deleteSong = async song => {
+        const confirm = await window.activeProject.promptConfirmDeleteSong(song.name)
         if (confirm) {
-            let id = song.id
+            const id = song.id
             dispatch({
                 type: DELETE_SONG_FROM_ACTIVE_PROJECT,
                 payload: {id}
@@ -55,7 +55,7 @@ export default function ActiveProject() {
 
 
 
-    let songs = Object.entries(state.activeProject?.songs).map(entry => {
+    const songs = Object.entries(state.activeProject?.songs).map(entry => {
         const [_, song] = entry
         return (
             <SongItem key={song.id} song={song}

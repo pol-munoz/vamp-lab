@@ -5,7 +5,7 @@ import {SKIP_CONFIRM_DELETE_SONG_STORE_KEY, store} from './store'
 const prompt = __non_webpack_require__('custom-electron-prompt')
 
 async function saveActiveProject(_, project) {
-    let json = JSON.stringify(project, null, 2)
+    const json = JSON.stringify(project, null, 2)
 
     void fs.writeFile(project.path, json,  {
         encoding: 'utf8',
@@ -31,7 +31,7 @@ async function promptConfirmDeleteSong(_, song) {
     if (store.get(SKIP_CONFIRM_DELETE_SONG_STORE_KEY)) {
         return true
     }
-    let result = await dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+    const result = await dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
         type: 'question',
         title: 'Delete the song?',
         message: `Delete ${song}?`,

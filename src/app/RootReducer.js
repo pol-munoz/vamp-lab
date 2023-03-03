@@ -12,8 +12,9 @@ const innerRootReducer = produce((draft, action) => {
 })
 
 const rootReducer = (state, action) => {
-    let nextState = innerRootReducer(state, action)
-    stateReactors.forEach(reactor => reactor(nextState, action))
+    const nextState = innerRootReducer(state, action)
+    const nextStateCopy = window.structuredClone(nextState)
+    stateReactors.forEach(reactor => reactor(nextStateCopy, action))
     return nextState
 }
 

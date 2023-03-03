@@ -16,7 +16,7 @@ function openProject(project) {
     app.addRecentDocument(project.path)
 
     // Update "internal" recent projects
-    let recentProject = new RecentProject(project.id, project.name, project.path)
+    const recentProject = new RecentProject(project.id, project.name, project.path)
     let recentProjects = RecentProject.fromArray(store.get(RECENT_PROJECTS_STORE_KEY))
     recentProjects = recentProjects.filter(e => e.path !== recentProject.path)
     recentProjects = [recentProject, ...recentProjects]
@@ -27,24 +27,24 @@ function openProject(project) {
 
 // Open the project from a file, reused sometimes in the code
 async function openProjectFromFile(filePath) {
-    let text = await fs.readFile(filePath, 'utf8')
-    let data = JSON.parse(text)
-    let project = Project.from(data)
+    const text = await fs.readFile(filePath, 'utf8')
+    const data = JSON.parse(text)
+    const project = Project.from(data)
     return openProject(project)
 }
 
 async function onCreate() {
-    let res = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
+    const res = await dialog.showSaveDialog(BrowserWindow.getFocusedWindow(), {
         buttonLabel: 'Create',
         nameFieldLabel: 'Project Name:',
         filters: [VAMP_FILE_TYPE],
     })
 
     if (!res.canceled) {
-        let filePath = res.filePath
-        let name = path.basename(filePath, '.vamp')
-        let project = new Project(name, filePath)
-        let json = JSON.stringify(project, null, 2)
+        const filePath = res.filePath
+        const name = path.basename(filePath, '.vamp')
+        const project = new Project(name, filePath)
+        const json = JSON.stringify(project, null, 2)
         await fs.writeFile(filePath, json,  {
             encoding: 'utf8',
             mode: 0o600
@@ -55,7 +55,7 @@ async function onCreate() {
 }
 
 async function onOpen() {
-    let res = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
+    const res = await dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
         filters: [VAMP_FILE_TYPE],
     })
 
@@ -68,7 +68,7 @@ async function onOpen() {
 async function nativeOpen(event, filePath) {
     event.preventDefault()
 
-    let project = await openProjectFromFile(filePath)
+    const project = await openProjectFromFile(filePath)
     BrowserWindow.getFocusedWindow().webContents.send('projects:nativeOpen', project)
     return project
 }
