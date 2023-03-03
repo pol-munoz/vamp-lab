@@ -62,8 +62,8 @@ export default function RecentProjects() {
             <div className="Vamp-header">
                 <h2 className="Vamp-title">Projects</h2>
                 <div className="Vamp-row">
-                    <Button onClick={createNewProject}>New</Button>
-                    <Button onClick={openExistingProject}>Open</Button>
+                    <Button onClick={createNewProject} rounded>New</Button>
+                    <Button onClick={openExistingProject} rounded>Open</Button>
                 </div>
             </div>
             <div className="Vamp-screen-list">

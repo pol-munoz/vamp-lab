@@ -1,5 +1,6 @@
 import React from 'react'
 import './index.css'
+import './menu.css'
 import {createRoot} from 'react-dom/client'
 import {createMemoryRouter, RouterProvider} from 'react-router-dom'
 import RecentProjects from './components/RecentProjects/RecentProjects'

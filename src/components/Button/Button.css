@@ -1,6 +1,6 @@
 .Button, .Button-transparent {
   padding: 0.3rem 1rem;
-  border-radius: 100vmax;
+  border-radius: 0;
   border: none;
   outline: none;
   font-size: 0.9rem;
@@ -50,7 +50,11 @@
   transform: scale(0.9);
 }
 
-.Button-round {
+.Button-rounded {
+  border-radius: 100vmax;
+}
+
+.Button-circle {
   padding: 0;
   border-radius: 100%;
   aspect-ratio: 1;

@@ -26,7 +26,7 @@ export default function ActiveProject() {
         const name = await window.activeProject.promptSongRename(song.name)
         const id = song.id
 
-        if (!!name && !!name.trim()) {
+        if (!!name && !!name.trim() && name !== song.name) {
             dispatch({
                 type: RENAME_SONG_IN_ACTIVE_PROJECT,
                 payload: {id, name}
@@ -67,13 +67,13 @@ export default function ActiveProject() {
         <div className="Vamp-screen">
             <div className="Vamp-header">
                 <div className="Vamp-row">
-                    <Button className="ActiveProject-back" transparent round
+                    <Button className="ActiveProject-back" transparent circle
                             onClick={() => navigate(-1)} >
                         <ChevronLeft />
                     </Button>
                     <h3 className="Vamp-title">{state.activeProject.name} - Songs</h3>
                 </div>
-                <Button onClick={addSong}>
+                <Button onClick={addSong} rounded>
                     Add
                 </Button>
             </div>

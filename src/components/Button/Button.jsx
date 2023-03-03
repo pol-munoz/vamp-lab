@@ -1,28 +1,31 @@
 import React from 'react'
 import './Button.css'
 
+const Button = React.forwardRef((props, ref) => {
+    const {className, transparent, destructive, circle, rounded, children, ...restOfProps} = props
+    let classes = 'Button'
 
-export default function Button(props) {
-    let className = 'Button'
-
-    if (props.transparent) {
-        className += '-transparent'
-        if (props.destructive) {
-            className += ' Button-transparent-destructive'
+    if (transparent) {
+        classes += '-transparent'
+        if (destructive) {
+            classes += ' Button-transparent-destructive'
         }
     }
-    if (props.round) {
-        className += ' Button-round'
+    if (circle) {
+        classes += ' Button-circle'
+    } else if (rounded) {
+        classes += ' Button-rounded'
     }
 
-
-    if (props.className) {
-        className += ` ${props.className}`
+    if (className) {
+        classes += ` ${className}`
     }
 
     return (
-        <button onClick={props.onClick} className={className} disabled={props.disabled}>
-            {props.children}
+        <button className={classes} {...restOfProps} ref={ref}>
+            {children}
         </button>
     )
-}
+})
+
+export default Button
