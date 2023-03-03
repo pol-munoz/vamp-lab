@@ -68,5 +68,5 @@
 }
 
 .Button-transparent-destructive:not([disabled]):hover, .Button-transparent-destructive:not([disabled]):focus-visible {
-  background: rgba(220, 51, 70, 0.3);
+  background: rgba(220, 51, 70, 0.4);
 }

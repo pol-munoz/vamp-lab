@@ -7,10 +7,12 @@
   border: none !important;
   background: var(--bg-color-light) !important;
 }
+
 .szh-menu__arrow {
   border: none !important;
   background: var(--bg-color-light) !important;
 }
+
 .szh-menu__item {
   display: flex;
   flex-direction: column;
@@ -19,6 +21,7 @@
   border-bottom: 1px solid var(--border-color-light);
   outline: none;
 }
+
 .szh-menu__item--hover {
   background: var(--bg-color-light) !important;
 }

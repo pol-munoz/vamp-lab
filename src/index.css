@@ -8,7 +8,7 @@ html {
   background: var(--bg-color);
   color: var(--text-color);
   --primary: #e24462;
-  --destructive: #db3043;
+  --destructive: #e25968;
 }
 
 body {
