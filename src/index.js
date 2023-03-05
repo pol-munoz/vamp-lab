@@ -30,7 +30,7 @@ const createWindow = () => {
             preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
         },
         show: false,
-        backgroundColor: '#3f3333',
+        backgroundColor: '#382e30',
     })
 
     mainWindow.setBounds(store.get(BOUNDS_STORE_KEY))
@@ -99,3 +99,4 @@ ipcMain.handle('dark-mode:system', () => {
 import './apis/menu'
 import './apis/projects'
 import './apis/activeProject'
+import './apis/activeSong'

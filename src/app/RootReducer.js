@@ -1,6 +1,7 @@
 import {useReducer} from 'react'
 import produce from 'immer'
 
+const inits = []
 const childReducers = []
 const stateReactors = []
 
@@ -13,9 +14,12 @@ const innerRootReducer = produce((draft, action) => {
 
 const rootReducer = (state, action) => {
     const nextState = innerRootReducer(state, action)
-    const nextStateCopy = window.structuredClone(nextState)
-    stateReactors.forEach(reactor => reactor(nextStateCopy, action))
+    stateReactors.forEach(reactor => reactor(nextState, action))
     return nextState
+}
+
+export const addInit = init => {
+    inits.push(init)
 }
 
 export const addReducer = reducer => {
@@ -38,5 +42,5 @@ export const removeStateReactor = reactor => {
 
 export const useRootReducer = initialState => {
     const [state, dispatch] = useReducer(rootReducer, initialState)
-    return [state, dispatch];
+    return [state, dispatch, inits];
 }

@@ -25,6 +25,7 @@ function render() {
             element: <ActiveSong/>,
         },
     ])
+
     root.render(
         <StoreProvider>
             <RouterProvider router={router}/>

@@ -47,7 +47,10 @@
    border-bottom: 1px solid var(--border-color);
 }
 
-.Vamp-back {
-  font-size: 1.2rem;
-  margin: -0.5rem 0 -0.5rem -0.5rem;  /* A bit hacky for my taste, but this way it fits better into its environment */
+/* A bit hacky for my taste, but this way it fits better into its environment */
+.Vamp-header-button-left {
+  margin: -0.5rem 0 -0.5rem -0.5rem;
+}
+.Vamp-header-button-right {
+  margin: -0.5rem -0.5rem -0.5rem 0;
 }
