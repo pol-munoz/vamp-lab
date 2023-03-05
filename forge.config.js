@@ -1,7 +1,11 @@
 module.exports = {
   packagerConfig: {
     icon: '/resources/icon',
-    extraResource: 'resources/osx/vamp.icns',
+    extraResources: [
+        'resources/osx/vamp.icns',
+        'resources/windows/vamp.ico',
+        'resources/prompt.css',
+    ],
     extendInfo: 'resources/osx/Info.plist'
   },
   rebuildConfig: {},

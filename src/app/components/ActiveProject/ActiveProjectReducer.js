@@ -1,11 +1,39 @@
-export const activeProjectReducer = (draft, action) => {
+import Song from '../../../model/Song'
+import {addReducer, addStateReactor} from '../../RootReducer'
+
+const activeProjectReducer = (draft, action) => {
     switch (action.type) {
-        case "setActiveProject": {
-            draft.activeProject = action.payload
+        case SET_ACTIVE_PROJECT:
+            draft.activeProject = action.payload.project
             break
-        }
-        default: {
+        case ADD_SONG_TO_ACTIVE_PROJECT:
+            const song = new Song(action.payload.name)
+            draft.activeProject.songs[song.id] = song
+            draft.activeSongId = song.id
+            draft.editingSong = true
             break
-        }
+        case DELETE_SONG_FROM_ACTIVE_PROJECT:
+            delete draft.activeProject.songs[action.payload.id]
+            break
+        case RENAME_SONG_IN_ACTIVE_PROJECT:
+            draft.activeProject.songs[action.payload.id].name = action.payload.name
+            break
+        default:
+            break
     }
-};
+}
+const activeProjectStateReactor = (newState, action) => {
+    if (action.type.startsWith(PERSIST_ACTIVE_PROJECT_ACTION)) {
+        window.activeProject.save(newState.activeProject)
+    }
+}
+
+addReducer(activeProjectReducer)
+addStateReactor(activeProjectStateReactor)
+
+export const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
+
+export const SET_ACTIVE_PROJECT = 'setActiveProject'
+export const ADD_SONG_TO_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'addSongToActiveProject'
+export const RENAME_SONG_IN_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'renameSongInActiveProject'
+export const DELETE_SONG_FROM_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'deleteSongFromActiveProject'

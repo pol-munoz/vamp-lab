@@ -10,7 +10,16 @@ contextBridge.exposeInMainWorld('darkMode', {
 contextBridge.exposeInMainWorld('projects', {
     create: () => ipcRenderer.invoke('projects:create'),
     open: () => ipcRenderer.invoke('projects:open'),
+    nativeOpenSubscribe: callback => ipcRenderer.on('projects:nativeOpen', callback),
+    nativeOpenUnSubscribe: () => ipcRenderer.removeAllListeners('projects:nativeOpen'),
     openRecent: recentProject => ipcRenderer.invoke('projects:openRecent', recentProject),
-    deleteRecent: recentProject => ipcRenderer.invoke('projects:deleteRecent', recentProject),
+    removeRecent: recentProject => ipcRenderer.invoke('projects:removeRecent', recentProject),
     getRecent: () => ipcRenderer.invoke('projects:getRecent'),
+})
+
+contextBridge.exposeInMainWorld('activeProject', {
+    save: project => ipcRenderer.send('activeProject:save', project),
+    promptSongName: () => ipcRenderer.invoke('activeProject:promptSongName'),
+    promptSongRename: name => ipcRenderer.invoke('activeProject:promptSongRename', name),
+    promptConfirmDeleteSong: name => ipcRenderer.invoke('activeProject:promptConfirmDeleteSong', name),
 })

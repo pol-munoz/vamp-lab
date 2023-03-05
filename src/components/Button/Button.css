@@ -1,12 +1,13 @@
 .Button, .Button-transparent {
   padding: 0.3rem 1rem;
-  border-radius: 100vmax;
+  border-radius: 0;
   border: none;
+  outline: none;
   font-size: 0.9rem;
 }
 
 .Button {
-  background: #dc334a;
+  background: var(--primary);
   color: white;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
 }
@@ -21,7 +22,7 @@
   cursor: pointer;
 }
 
-.Button:not([disabled]):hover {
+.Button:not([disabled]):hover, .Button:not([disabled]):focus-visible {
   filter: brightness(1.1);
   transform: scale(1.05);
   box-shadow: 0 2px 3px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.3);
@@ -41,14 +42,31 @@
   opacity: 0.2;
 }
 
-.Button-transparent:not([disabled]):hover {
+.Button-transparent:not([disabled]):hover, .Button-transparent:not([disabled]):focus-visible {
   opacity: 1;
   background: rgba(255, 128, 128, 0.2);
 }
+.Button-transparent:not([disabled]):active {
+  transform: scale(0.9);
+}
 
-.Button-round {
+.Button-rounded {
+  border-radius: 100vmax;
+}
+
+.Button-circle {
   padding: 0;
   border-radius: 100%;
   aspect-ratio: 1;
-  min-width: calc(1.8rem);
+  min-width: 2rem;
+  display: flex;
+}
+
+.Button-transparent-destructive {
+  opacity: 1;
+  color: var(--destructive);
+}
+
+.Button-transparent-destructive:not([disabled]):hover, .Button-transparent-destructive:not([disabled]):focus-visible {
+  background: rgba(220, 51, 70, 0.4);
 }

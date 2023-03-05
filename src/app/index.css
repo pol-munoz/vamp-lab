@@ -10,7 +10,7 @@
 
 .Vamp-header {
   background: var(--bg-color-light);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color-light);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   padding: 1rem;
   position: relative;
@@ -20,9 +20,10 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  min-height: 4rem;
 }
 
-.Vamp-header-buttons {
+.Vamp-row {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -33,10 +34,20 @@
 .Vamp-screen {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   height: 100%;
 }
 
 .Vamp-screen-list {
   overflow-y: scroll;
   flex: 1;
+}
+
+.Vamp-screen-list-item {
+   border-bottom: 1px solid var(--border-color);
+}
+
+.Vamp-back {
+  font-size: 1.2rem;
+  margin: -0.5rem 0 -0.5rem -0.5rem;  /* A bit hacky for my taste, but this way it fits better into its environment */
 }

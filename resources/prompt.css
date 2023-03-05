@@ -1,0 +1,130 @@
+/* This repeats a lot of CSS from the app, but I can't find a better alternative with the current library implementation */
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --bg-color: #382e30;
+    --border-color: #4e4043;
+    --bg-color-light: #483b3d;
+    --border-color-light: #5c4c4e;
+    --text-color: white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html {
+    --bg-color: #dfd3d0;
+    --border-color: #efe3e0;
+    --bg-color-light: #f3efef;
+    --border-color-light: #e3dede;
+    --text-color: black;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body, #container, #form {
+  all: unset;
+  display: flex;
+  flex: 1;
+}
+
+body {
+  flex-direction: column;
+  justify-content: stretch;
+  flex: 1;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+  Arial, sans-serif;
+  user-select: none;
+  background: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  --primary: #e24462;
+}
+
+#container {
+  padding: 1em;
+  align-items: center;
+}
+
+#form {
+  flex-direction: column;
+}
+
+#label {
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+#data {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+input {
+  outline: none;
+  border: none !important;
+  box-shadow: 0 2px 4px rgb(0, 0, 0, 0.2);
+}
+
+input:hover {
+  box-shadow: 0 3px 6px rgb(0, 0, 0, 0.3);
+}
+
+input:focus-visible {
+  outline: 2px solid var(--primary);
+  box-shadow: 0 4px 8px rgb(0, 0, 0, 0.3);
+}
+
+/* Buttons */
+#ok, #cancel {
+  padding: 0.3rem 1rem !important;
+  border-radius: 100vmax !important;
+  outline: none;
+  border: none;
+  font-size: 0.9rem !important;
+}
+
+#ok {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
+}
+
+#cancel {
+  opacity: 0.6;
+  color: inherit;
+  background: none;
+}
+
+#ok:not([disabled]), #cancel:not([disabled]) {
+  cursor: pointer;
+}
+
+#ok:not([disabled]):hover, #ok:not([disabled]):focus-visible {
+  filter: brightness(1.1);
+  transform: scale(1.05);
+  box-shadow: 0 2px 3px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.3);
+}
+
+#ok:not([disabled]):active {
+  filter: brightness(1.2);
+  transform: scale(1);
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.2), inset 0 1px 1px rgb(255, 255, 255, 0.2);
+}
+
+#ok:disabled {
+  opacity: 0.6;
+  box-shadow: 0 1px 1px rgb(0, 0, 0, 0.2);
+}
+
+#cancel:disabled {
+  opacity: 0.2;
+}
+
+#cancel:not([disabled]):hover, #cancel:not([disabled]):focus-visible {
+  opacity: 1;
+  background: rgba(255, 128, 128, 0.2);
+}

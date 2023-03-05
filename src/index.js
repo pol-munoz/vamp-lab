@@ -1,10 +1,24 @@
 import {app, BrowserWindow, ipcMain, nativeTheme} from 'electron'
 
-
 import {BOUNDS_STORE_KEY, store} from './apis/store'
+
+import {ProgId, Regedit, ShellOption} from 'electron-regedit'
+
+new ProgId({
+    description: 'Vamp Project File',
+    icon: 'resources/windows/vamp.ico',
+    extensions: ['vamp', 'vamplab'],
+    shell: [
+        new ShellOption({verb: ShellOption.OPEN}),
+    ]
+})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
+    app.quit()
+}
+
+if (Regedit.squirrelStartupEvent()) {
     app.quit()
 }
 
@@ -84,3 +98,4 @@ ipcMain.handle('dark-mode:system', () => {
 // Other configuration, to avoid clutter in this file
 import './apis/menu'
 import './apis/projects'
+import './apis/activeProject'
