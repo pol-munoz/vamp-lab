@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
-import './RecentProjects.css'
 import Button from '../../../components/Button/Button'
 import RecentProjectItem from './RecentProjectItem/RecentProjectItem'
 import {StoreContext} from '../../StoreContext'
@@ -18,7 +17,7 @@ export default function RecentProjects() {
                 type: SET_ACTIVE_PROJECT,
                 payload: {project}
             })
-            navigate('/project/home')
+            navigate('project')
         }
     }
 

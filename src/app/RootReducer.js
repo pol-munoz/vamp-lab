@@ -6,7 +6,7 @@ const stateReactors = []
 
 const innerRootReducer = produce((draft, action) => {
     childReducers.forEach(reducer => {
-        draft = reducer(draft, action);
+        reducer(draft, action);
     })
     return draft
 })
@@ -29,6 +29,11 @@ export const addStateReactor = reactor => {
 export const removeReducer = reducer => {
     const index = childReducers.indexOf(reducer)
     childReducers.splice(index, 1)
+}
+
+export const removeStateReactor = reactor => {
+    const index = stateReactors.indexOf(reactor)
+    stateReactors.splice(index, 1)
 }
 
 export const useRootReducer = initialState => {

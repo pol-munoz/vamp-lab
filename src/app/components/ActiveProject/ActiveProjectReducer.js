@@ -3,27 +3,23 @@ import {addReducer, addStateReactor} from '../../RootReducer'
 
 const activeProjectReducer = (draft, action) => {
     switch (action.type) {
-        case SET_ACTIVE_PROJECT: {
+        case SET_ACTIVE_PROJECT:
             draft.activeProject = action.payload.project
             break
-        }
-        case ADD_SONG_TO_ACTIVE_PROJECT: {
+        case ADD_SONG_TO_ACTIVE_PROJECT:
             const song = new Song(action.payload.name)
             draft.activeProject.songs[song.id] = song
             draft.activeSongId = song.id
+            draft.editingSong = true
             break
-        }
-        case DELETE_SONG_FROM_ACTIVE_PROJECT: {
+        case DELETE_SONG_FROM_ACTIVE_PROJECT:
             delete draft.activeProject.songs[action.payload.id]
             break
-        }
-        case RENAME_SONG_IN_ACTIVE_PROJECT: {
+        case RENAME_SONG_IN_ACTIVE_PROJECT:
             draft.activeProject.songs[action.payload.id].name = action.payload.name
             break
-        }
-        default: {
+        default:
             break
-        }
     }
 }
 const activeProjectStateReactor = (newState, action) => {
@@ -35,7 +31,7 @@ const activeProjectStateReactor = (newState, action) => {
 addReducer(activeProjectReducer)
 addStateReactor(activeProjectStateReactor)
 
-const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
+export const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
 
 export const SET_ACTIVE_PROJECT = 'setActiveProject'
 export const ADD_SONG_TO_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'addSongToActiveProject'

@@ -46,3 +46,8 @@
 .Vamp-screen-list-item {
    border-bottom: 1px solid var(--border-color);
 }
+
+.Vamp-back {
+  font-size: 1.2rem;
+  margin: -0.5rem 0 -0.5rem -0.5rem;  /* A bit hacky for my taste, but this way it fits better into its environment */
+}

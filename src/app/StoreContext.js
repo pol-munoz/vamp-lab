@@ -9,6 +9,7 @@ const initialState = {
     recentProjects: [],
     activeProject: new Project(),
     activeSongId: '',
+    editingSong: false,
 }
 
 const StoreProvider = (props) => {
