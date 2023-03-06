@@ -1,0 +1,46 @@
+.SongTrack {
+  display: grid;
+  grid-template:  "volume title . device" auto
+                  "volume track track track" auto /
+                  auto auto 1fr auto;
+  padding: 1rem;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.SongTrack-title {
+  grid-area: title;
+  margin: 0;
+}
+
+.SongTrack-volume {
+  grid-area: volume;
+  accent-color: var(--primary);
+  -webkit-appearance: slider-vertical;
+  width: 10px;
+  cursor: pointer;
+  margin: 0 0.5rem 0 0.25rem;
+  outline-offset: 0.5rem;
+  border-radius: 100vmax;
+}
+
+.SongTrack-volume:focus-visible {
+  outline: 2px solid var(--primary);
+}
+
+.SongTrack-device {
+  grid-area: device;
+  outline: none;
+  color: var(--text-color);
+  padding: 0.3rem 0.5rem 0.3rem 1rem;
+  border-radius: 100vmax;
+  border: none;
+  font-size: 0.9rem;
+  border-right: 0.5rem solid transparent;
+  background: rgba(255, 128, 128, 0.1);
+  cursor: pointer;
+}
+
+.SongTrack-device:not([disabled]):hover, .SongTrack-device:not([disabled]):focus-visible {
+  background: rgba(255, 128, 128, 0.2);
+}

@@ -1,16 +1,21 @@
 import {addInit, addReducer, addStateReactor} from './RootReducer'
-const vampInit = async dispatch => {
-    const res = await navigator.mediaDevices.enumerateDevices()
-    const devices = {}
-    res.forEach(device => {
-        if (device.kind === 'audiooutput') {
-            devices[device.deviceId] = device
-        }
-    })
-    dispatch({
-        type: SET_DEVICES,
-        payload: {devices}
-    })
+const vampInit = dispatch => {
+    const updateDeviceList = async () => {
+        const res = await navigator.mediaDevices.enumerateDevices()
+        const devices = {}
+        res.forEach(device => {
+            if (device.kind === 'audiooutput') {
+                devices[device.deviceId] = device.label
+            }
+        })
+        console.log(devices)
+        dispatch({
+            type: SET_DEVICES,
+            payload: {devices}
+        })
+    }
+    navigator.mediaDevices.addEventListener('devicechange', updateDeviceList)
+    void updateDeviceList()
 }
 
 const vampReducer = (draft, action) => {

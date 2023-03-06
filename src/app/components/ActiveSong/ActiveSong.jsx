@@ -5,17 +5,18 @@ import Button from '../../../components/Button/Button'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 import Play from '../../../../resources/icons/play.svg'
 import Pause from '../../../../resources/icons/pause.svg'
-import {ADD_TRACK_TO_ACTIVE_SONG, SET_TRACK_VOLUME_IN_ACTIVE_SONG} from './ActiveSongReducer'
-import SongTrack from './components/SongTrack/SongTrack'
+import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
+import SongTrack from './SongTrack/SongTrack'
 
 export default function ActiveSong(props) {
 
     const [playing, setPlaying] = useState(false)
     const {state, dispatch} = useContext(StoreContext)
     const navigate = useNavigate()
-
     const edit = state.editingSong
+
     const song = state.activeProject.songs[state.activeSongId]
+    console.log('Render song: ' + song.name)
 
     const onPlayPause = () => {
         setPlaying(!playing)
@@ -32,16 +33,9 @@ export default function ActiveSong(props) {
         }
     }
 
-    const onVolumeChange = (trackId, volume) => {
-        dispatch({
-            type: SET_TRACK_VOLUME_IN_ACTIVE_SONG,
-            payload: {trackId, volume}
-        })
-    }
-
     const tracks = Object.entries(song.tracks).map(entry => {
         const [_, track] = entry
-        return (<SongTrack key={track.id} track={track} onVolumeChange={onVolumeChange}/>)
+        return (<SongTrack key={track.id} track={track} dispatch={dispatch} devices={state.devices} playing={playing}/>)
     }) ?? []
 
     return (

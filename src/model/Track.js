@@ -6,6 +6,6 @@ export default class Track {
         this.name = name
         this.path = path
         this.volume = 0.5
-        this.output = 'default'
+        this.device = 'default'
     }
 }
