@@ -11,23 +11,3 @@
   margin: 0;
   grid-area: name;
 }
-
-.SongItem-menu-text {
-  margin: 0;
-}
-
-.SongItem-menu-button {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding-right: 0.4rem;
-}
-
-.SongItem-menu-button:not([disabled]):hover, .Button-transparent:not([disabled]):focus-visible {
-  transform: scale(1.02);
-}
-.SongItem-menu-button:not([disabled]):active {
-  transform: scale(1);
-}

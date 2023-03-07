@@ -1,6 +1,6 @@
 import Song from '../../../model/Song'
 import {addReducer} from '../../RootReducer'
-import {PERSIST_ACTIVE_PROJECT_ACTION} from '../../VampReducer'
+import {PERSIST_ACTIVE_PROJECT_ACTION} from '../../VampLabReducer'
 
 const activeProjectReducer = (draft, action) => {
     switch (action.type) {

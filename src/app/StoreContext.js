@@ -6,11 +6,9 @@ import Project from '../model/Project'
 export const StoreContext = React.createContext({})
 
 const initialState = {
-    recentProjects: [],
     activeProject: new Project(),
     activeSongId: '',
     editingSong: false,
-    audio: {},
     devices: {},
 }
 

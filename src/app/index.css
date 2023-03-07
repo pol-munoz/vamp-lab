@@ -48,9 +48,30 @@
 }
 
 /* A bit hacky for my taste, but this way it fits better into its environment */
-.Vamp-header-button-left {
+.Vamp-snug-button-left {
   margin: -0.5rem 0 -0.5rem -0.5rem;
 }
-.Vamp-header-button-right {
+.Vamp-snug-button-right {
   margin: -0.5rem -0.5rem -0.5rem 0;
+}
+
+
+.Vamp-menu-text {
+  margin: 0;
+}
+
+.Vamp-menu-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-right: 0.4rem !important;
+}
+
+.Vamp-menu-button:not([disabled]):hover, .Vamp-menu-button:not([disabled]):focus-visible {
+  transform: scale(1.02) !important;
+}
+.Vamp-menu-button:not([disabled]):active {
+  transform: scale(1) !important;
 }

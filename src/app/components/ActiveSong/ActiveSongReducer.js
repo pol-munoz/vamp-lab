@@ -1,5 +1,5 @@
 import {addReducer} from '../../RootReducer'
-import {PERSIST_ACTIVE_PROJECT_ACTION} from '../../VampReducer'
+import {PERSIST_ACTIVE_PROJECT_ACTION} from '../../VampLabReducer'
 
 const activeSongReducer = (draft, action) => {
     switch (action.type) {
@@ -13,6 +13,9 @@ const activeSongReducer = (draft, action) => {
             break
         case ADD_TRACK_TO_ACTIVE_SONG:
             draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id] = action.payload.track
+            break
+        case DELETE_TRACK_FROM_ACTIVE_SONG:
+            delete draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id]
             break
         case SET_TRACK_VOLUME_IN_ACTIVE_SONG:
             draft.activeProject.songs[draft.activeSongId].tracks[action.payload.trackId].volume = action.payload.volume
@@ -29,5 +32,6 @@ addReducer(activeSongReducer)
 export const SET_ACTIVE_SONG_EDITING = 'setActiveSongEditing'
 export const SET_ACTIVE_SONG_PLAYING = 'setActiveSongPlaying'
 export const ADD_TRACK_TO_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'addTrackToActiveSong'
+export const DELETE_TRACK_FROM_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'deleteTrackFromActiveSong'
 export const SET_TRACK_VOLUME_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'setTrackVolume'
 export const SET_TRACK_DEVICE_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'setTrackDevice'

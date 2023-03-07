@@ -82,7 +82,7 @@ export default function ActiveProject() {
         <div className="Vamp-screen">
             <div className="Vamp-header">
                 <div className="Vamp-row">
-                    <Button className="Vamp-header-button-left" transparent circle
+                    <Button className="Vamp-snug-button-left" transparent circle
                             onClick={() => navigate(-1)}>
                         <ChevronLeft/>
                     </Button>

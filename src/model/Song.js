@@ -6,7 +6,7 @@ export default class Song {
         this.name = name
         // trackId -> Track
         this.tracks = {}
-        // segmentId -> Segment
-        this.segments = {}
+        // vampId -> Vamp
+        this.vamps = {}
     }
 }

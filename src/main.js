@@ -1,4 +1,4 @@
-import {app, BrowserWindow, ipcMain, nativeTheme} from 'electron'
+import {app, BrowserWindow, ipcMain, nativeTheme, protocol} from 'electron'
 
 import {BOUNDS_STORE_KEY, store} from './apis/store'
 
@@ -58,10 +58,33 @@ function ensureWindowExists() {
     }
 }
 
+protocol.registerSchemesAsPrivileged([{
+    scheme: 'file',
+    privileges: {
+        standard: true,
+        secure: true,
+        bypassCSP: true
+    }
+}])
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
+
+app.on('ready', async () => {
+    const protocolName = 'vamp'
+
+    protocol.registerFileProtocol(protocolName, (request, callback) => {
+        const url = request.url.replace(`${protocolName}://`, '')
+        try {
+            return callback(decodeURIComponent(url))
+        } catch (error) {
+            // Handle the error as needed
+            console.error(error)
+        }
+    })
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -100,3 +123,4 @@ import './apis/menu'
 import './apis/projects'
 import './apis/activeProject'
 import './apis/activeSong'
+
