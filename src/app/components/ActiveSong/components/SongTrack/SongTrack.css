@@ -1,7 +1,7 @@
 .SongTrack {
   display: grid;
   grid-template:  "volume title . tools" auto
-                  "volume track track track" auto /
+                  "volume track track track" 1fr /
                   auto auto 1fr auto;
   padding: 1rem;
   gap: 1rem;

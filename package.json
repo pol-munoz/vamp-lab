@@ -47,7 +47,6 @@
     "react-router-dom": "^6.8.1",
     "use-immer": "^0.8.1",
     "uuid": "^9.0.0",
-    "wavesurfer-react": "^2.2.2",
     "wavesurfer.js": "^6.4.0"
   },
   "asarUnpack": [

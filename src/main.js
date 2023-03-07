@@ -59,13 +59,15 @@ function ensureWindowExists() {
 }
 
 protocol.registerSchemesAsPrivileged([{
-    scheme: 'file',
+    scheme: 'vamp',
     privileges: {
         standard: true,
         secure: true,
-        bypassCSP: true
+        bypassCSP: true,
+        supportFetchAPI: true
     }
 }])
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

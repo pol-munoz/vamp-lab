@@ -11,6 +11,7 @@ import Kebab from '../../../../../../resources/icons/kebab.svg'
 import Bin from '../../../../../../resources/icons/bin.svg'
 import '@szhsin/react-menu/dist/core.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
+import WaveForm from './WaveForm/WaveForm'
 
 export default memo(function SongTrack(props) {
     const onVolumeChange = (trackId, volume) => {
@@ -67,5 +68,6 @@ export default memo(function SongTrack(props) {
                     </MenuItem>
                 </Menu> : null}
         </div>
+        <WaveForm className="SongTrack-track" {...props}/>
     </div>)
 })
