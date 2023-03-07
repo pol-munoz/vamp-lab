@@ -44,7 +44,7 @@ export default memo(function SongTrack(props) {
                    onVolumeChange(props.track.id, event.target.value)
                }}/>
         <div className="Vamp-row SongTrack-tools">
-            <select className="SongTrack-device" value={props.track.output}
+            <select className="SongTrack-device" value={props.track.device}
                     onChange={event => {
                         onDeviceChange(props.track.id, event.target.value)
                     }}>
