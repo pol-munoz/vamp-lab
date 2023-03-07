@@ -6,8 +6,7 @@ import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 import Play from '../../../../resources/icons/play.svg'
 import Pause from '../../../../resources/icons/pause.svg'
 import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
-import SongTrack from './components/SongTrack/SongTrack'
-import VampBar from './components/VampBar/VampBar'
+import SongTrack from './SongTrack/SongTrack'
 
 export default function ActiveSong(props) {
 
@@ -17,7 +16,6 @@ export default function ActiveSong(props) {
     const editable = state.editingSong
 
     const song = state.activeProject.songs[state.activeSongId]
-    console.log('Render song: ' + song.name)
 
     const onPlayPause = () => {
         setPlaying(!playing)
@@ -39,7 +37,7 @@ export default function ActiveSong(props) {
     let longestTrack = trackData.reduce((a, b) => a.duration > b.duration ? a : b, 0)
 
     const tracks = trackData.map(track => (
-        <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices}
+        <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices} vamps={song.vamps}
                    editable={editable} playing={playing} duration={longestTrack.duration}/>
     )) ?? []
 
@@ -66,12 +64,9 @@ export default function ActiveSong(props) {
                     </Button>
                 </div>
             </div>
-            {tracks.length > 0 ?
-                <VampBar vamps={song.vamps} dispatch={dispatch} duration={longestTrack.duration}/>
-                : null}
             <div className="Vamp-screen-list">
                 {tracks.length > 0 ? tracks :
-                    <p className="Vamp-placeholder">This song's vamps and tracks will appear here</p>}
+                    <p className="Vamp-placeholder">This song's tracks will appear here</p>}
             </div>
         </div>
     )

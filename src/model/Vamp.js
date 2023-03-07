@@ -5,6 +5,13 @@ export default class Vamp {
         this.id = uuidv4()
         this.start = start
         this.end = end
-        this.loops = false
+        this.loop = false
+    }
+
+    static from(data) {
+        const vamp = new Vamp(data.start, data.end)
+        vamp.id = data.id
+        vamp.loop = data.loop
+        return vamp
     }
 }
