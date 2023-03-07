@@ -5,7 +5,7 @@ import Button from '../../../components/Button/Button'
 import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 import Play from '../../../../resources/icons/play.svg'
 import Pause from '../../../../resources/icons/pause.svg'
-import {ADD_TRACK_TO_ACTIVE_SONG, DELETE_TRACK_FROM_ACTIVE_SONG} from './ActiveSongReducer'
+import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
 import SongTrack from './components/SongTrack/SongTrack'
 import VampBar from './components/VampBar/VampBar'
 
@@ -33,19 +33,13 @@ export default function ActiveSong(props) {
             })
         }
     }
-    const deleteTrack = async (track) => {
-        dispatch({
-            type: DELETE_TRACK_FROM_ACTIVE_SONG,
-            payload: {track}
-        })
-    }
+
     let trackData = Object.entries(song.tracks).map(entry => entry[1])
 
     let longestTrack = trackData.reduce((a, b) => a.duration > b.duration ? a : b, 0)
 
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices}
-                   onDeleteClick={deleteTrack}
                    editable={editable} playing={playing}/>
     )) ?? []
 
