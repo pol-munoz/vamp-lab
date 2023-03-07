@@ -8,37 +8,47 @@ export default memo(function WaveForm(props) {
     const containerRef = useRef()
     const waveSurferRef = useRef()
 
-    const sync = () => {
-        if (waveSurferRef.current) {
-            if (waveSurferRef.current.isPlaying() !== props.playing) {
-                waveSurferRef.current.playPause()
-            }
-            if (waveSurferRef.current.auxSinkId !== props.track.device) {
-                waveSurferRef.current.setSinkId(props.track.device)
-                waveSurferRef.current.auxSinkId = props.track.device
-            }
-        }
-    }
     useEffect(() => {
-        console.log('Effect waveform ' + props.track.name)
-
         const waveSurfer = WaveSurfer.create({
             container: containerRef.current,
             responsive: 50,
             cursorWidth: 0,
+            interact: false
         })
 
         waveSurfer.load('vamp://' + props.track.path)
         waveSurfer.on('ready', () => {
             waveSurferRef.current = waveSurfer
             setLoading(false)
-            sync()
         })
 
         return () =>  waveSurfer.destroy()
     }, [props.track.path])
 
-    sync()
+    useEffect(() => {
+        waveSurferRef.current?.drawer.fireEvent('redraw')
+    }, [props.duration, loading])
+
+    useEffect(() => {
+        if (waveSurferRef.current && waveSurferRef.current.isPlaying() !== props.playing) {
+            waveSurferRef.current.playPause()
+        }
+    }, [props.playing, loading])
+
+    useEffect(() => {
+        waveSurferRef.current?.setSinkId(props.track.device)
+    }, [props.track.device, loading])
+
+    useEffect(() => {
+        if (waveSurferRef.current && waveSurferRef.current.getVolume() !== props.track.volume) {
+            waveSurferRef.current.setVolume(props.track.volume)
+            if (props.track.volume === 0.0 && !waveSurferRef.current.getMute()) {
+                waveSurferRef.current.setMute(true)
+            } else if (props.track.volume > 0.0 && waveSurferRef.current.getMute()) {
+                waveSurferRef.current.setMute(false)
+            }
+        }
+    }, [props.track.volume, loading])
 
     let classes = 'WaveForm'
 
@@ -46,10 +56,16 @@ export default memo(function WaveForm(props) {
         classes += ` ${props.className}`
     }
 
-    console.log('Render waveform ' + props.track.name)
-
+    const widthPercentage = (props.track.duration / props.duration) * 100
     return (
-        <div className={classes} ref={containerRef}>
+        <div className={classes} style={{paddingRight: `${100 - widthPercentage}%`}} onClick={event => {
+            const bounds = event.target.getBoundingClientRect()
+            const x = (event.clientX - bounds.left) / bounds.width
+            const y = (event.clientY - bounds.top) / bounds.height
+            console.log(x, y)
+        }}>
+            <div ref={containerRef} >
+            </div>
             {loading ? <p className="WaveForm-placeholder">Loading...</p> : null}
         </div>
     )

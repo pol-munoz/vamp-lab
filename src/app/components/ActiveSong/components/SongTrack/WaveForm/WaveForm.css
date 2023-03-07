@@ -1,5 +1,6 @@
 .WaveForm {
   position: relative;
+  overflow: visible;
 }
 
 .WaveForm-placeholder {

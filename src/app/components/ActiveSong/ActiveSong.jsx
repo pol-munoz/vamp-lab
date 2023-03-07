@@ -40,7 +40,7 @@ export default function ActiveSong(props) {
 
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices}
-                   editable={editable} playing={playing}/>
+                   editable={editable} playing={playing} duration={longestTrack.duration}/>
     )) ?? []
 
     return (
