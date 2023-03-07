@@ -35,9 +35,6 @@ const activeSongReducer = (draft, action) => {
         case DELETE_VAMP_FROM_ACTIVE_SONG:
             delete draft.activeProject.songs[draft.activeSongId].vamps[action.payload.vamp.id]
             break
-        case TOGGLE_VAMP_LOOP_IN_ACTIVE_SONG:
-            draft.activeProject.songs[draft.activeSongId].vamps[action.payload.vamp.id].loop = !draft.activeProject.songs[draft.activeSongId].vamps[action.payload.vamp.id].loop
-            break
         default: break;
     }
 }
@@ -54,4 +51,3 @@ export const SET_TRACK_DEVICE_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + '
 export const ADD_VAMP_TO_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'addVampToActiveSong'
 export const DELETE_VAMP_FROM_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'deleteVampFromActiveSong'
 export const UPDATE_VAMP_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'updateVampInActiveSong'
-export const TOGGLE_VAMP_LOOP_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'toggleVampLoopInActiveSong'

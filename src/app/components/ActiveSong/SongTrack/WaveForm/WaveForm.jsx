@@ -8,7 +8,7 @@ import {
     UPDATE_TRACK_IN_ACTIVE_SONG,
     ADD_VAMP_TO_ACTIVE_SONG,
     DELETE_VAMP_FROM_ACTIVE_SONG,
-    UPDATE_VAMP_IN_ACTIVE_SONG, TOGGLE_VAMP_LOOP_IN_ACTIVE_SONG
+    UPDATE_VAMP_IN_ACTIVE_SONG
 } from '../../ActiveSongReducer'
 import Vamp from '../../../../../model/Vamp'
 
@@ -69,6 +69,22 @@ export default memo(function WaveForm(props) {
                 })
             }
         })
+        waveSurfer.on('region-click', (region, event) => {
+            const vamp = Vamp.from(region)
+            if (props.editable && event.altKey) {
+                region.remove()
+                props.dispatch({
+                    type: DELETE_VAMP_FROM_ACTIVE_SONG,
+                    payload: {vamp}
+                })
+            } else {
+                vamp.loop = !vamp.loop
+                props.dispatch({
+                    type: UPDATE_VAMP_IN_ACTIVE_SONG,
+                    payload: {vamp}
+                })
+            }
+        })
 
         return () => waveSurfer.destroy()
     }, [props.track.path])
@@ -92,27 +108,11 @@ export default memo(function WaveForm(props) {
             waveSurferRef.current.clearRegions()
             Object.entries(props.vamps).forEach(entry => {
                 const [_, vamp] = entry
-                const region = waveSurferRef.current.addRegion({
+                waveSurferRef.current.addRegion({
                     ...vamp,
                     drag: props.editable,
                     resize: props.editable,
                     color: vamp.loop ? 'rgba(226, 68, 98, 0.5)' : 'rgba(0, 0, 0, 0.1)'
-                })
-
-                region.on('click', event => {
-                    const vamp = Vamp.from(region)
-                    if (props.editable && event.altKey) {
-                        region.remove()
-                        props.dispatch({
-                            type: DELETE_VAMP_FROM_ACTIVE_SONG,
-                            payload: {vamp}
-                        })
-                    } else {
-                        props.dispatch({
-                            type: TOGGLE_VAMP_LOOP_IN_ACTIVE_SONG,
-                            payload: {vamp}
-                        })
-                    }
                 })
             })
         }
