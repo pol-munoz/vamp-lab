@@ -23,6 +23,9 @@ const activeSongReducer = (draft, action) => {
         case SET_TRACK_DEVICE_IN_ACTIVE_SONG:
             draft.activeProject.songs[draft.activeSongId].tracks[action.payload.trackId].device = action.payload.device
             break
+        case UPDATE_TRACK_IN_ACTIVE_SONG:
+            draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id] = action.payload.track
+            break
         default: break;
     }
 }
@@ -35,3 +38,4 @@ export const ADD_TRACK_TO_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'addTrac
 export const DELETE_TRACK_FROM_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'deleteTrackFromActiveSong'
 export const SET_TRACK_VOLUME_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'setTrackVolume'
 export const SET_TRACK_DEVICE_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'setTrackDevice'
+export const UPDATE_TRACK_IN_ACTIVE_SONG = PERSIST_ACTIVE_PROJECT_ACTION + 'updateTrack'
