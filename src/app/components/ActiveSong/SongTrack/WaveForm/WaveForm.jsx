@@ -44,7 +44,8 @@ export default memo(function WaveForm(props) {
             cursorColor: '#222',
             plugins: [
                 RegionsPlugin.create({
-                    dragSelection: props.editable
+                    dragSelection: props.editable,
+                    slop: 5
                 })
             ]
         })
