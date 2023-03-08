@@ -37,6 +37,7 @@ export default function ActiveSong(props) {
         const track = await window.activeSong.promptOpenTrack()
 
         if (track) {
+            onStop()
             dispatch({
                 type: ADD_TRACK_TO_ACTIVE_SONG,
                 payload: {track}
