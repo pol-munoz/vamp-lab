@@ -136,7 +136,7 @@ export default memo(function WaveForm(props) {
                     ...vamp,
                     drag: props.editable,
                     resize: props.editable,
-                    color: vamp.loop ? 'rgba(226, 68, 98, 0.6)' : 'rgba(0, 0, 0, 0.15)',
+                    color: vamp.loop ? 'rgba(226, 68, 98, 0.6)' : 'rgba(255, 255, 255, 0.3)',
                 })
             })
         }
