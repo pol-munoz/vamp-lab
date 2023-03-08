@@ -3,6 +3,9 @@
   overflow: hidden;
   margin-right: -1rem;
 }
+.WaveForm-zoom-out > * {
+  overflow: hidden !important;
+}
 
 .WaveForm > *::-webkit-scrollbar {
   height: 0.5rem;

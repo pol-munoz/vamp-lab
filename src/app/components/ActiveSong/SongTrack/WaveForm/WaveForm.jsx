@@ -159,6 +159,10 @@ export default memo(function WaveForm(props) {
         classes += ` ${props.className}`
     }
 
+    if (sync.zoom.zoom === 0) {
+        classes += ' WaveForm-zoom-out'
+    }
+
     return (
         <div ref={containerRef} className={classes}>
             {loading ? <p className="WaveForm-placeholder">Loading...</p> : null}
