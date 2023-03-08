@@ -158,7 +158,7 @@ export default memo(function WaveForm(props) {
 
     // Position update
     useEffect(() => {
-        waveSurferRef.current?.seekAndCenter(sync.lastPos.lastPos)
+        waveSurferRef.current?.seekTo(sync.lastPos.lastPos)
     }, [sync.lastPos.lastPos, loading])
 
     // Scroll update

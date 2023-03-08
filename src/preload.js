@@ -27,4 +27,5 @@ contextBridge.exposeInMainWorld('activeProject', {
 contextBridge.exposeInMainWorld('activeSong', {
     promptOpenTrack: () => ipcRenderer.invoke('activeSong:promptOpenTrack'),
     promptUpdateTrack: id => ipcRenderer.invoke('activeSong:promptUpdateTrack', id),
+    showHelp: () => ipcRenderer.send('activeSong:showHelp'),
 })

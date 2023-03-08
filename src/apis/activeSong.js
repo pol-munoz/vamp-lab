@@ -44,7 +44,18 @@ async function promptUpdateTrack(_, id) {
 }
 
 
+async function showHelp() {
+    void dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+        type: 'info',
+        title: 'Editing songs',
+        message: 'Vamps are regions you can loop',
+        detail: 'Create vamp: Drag on a track\nMove/resize vamp: Drag\nToggle vamp loop: Click\nDelete vamp: Alt-click'
+    })
+}
+
+
 app.whenReady().then(() => {
     ipcMain.handle('activeSong:promptOpenTrack', promptOpenTrack)
     ipcMain.handle('activeSong:promptUpdateTrack', promptUpdateTrack)
+    ipcMain.on('activeSong:showHelp', showHelp)
 })
