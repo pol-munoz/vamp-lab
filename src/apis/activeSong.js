@@ -4,7 +4,7 @@ import Track from '../model/Track'
 
 const MUSIC_FILTER = {
     name: 'Music',
-    extensions: ['mp3']
+    extensions: ['mp3', 'wav', 'aac', 'webm', 'flac']
 }
 
 async function processTrackResult(res) {
