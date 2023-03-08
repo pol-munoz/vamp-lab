@@ -2,6 +2,7 @@ import React, {memo, useContext, useEffect, useRef, useState} from 'react'
 import './WaveForm.css'
 import WaveSurfer from 'wavesurfer.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js'
+import CursorPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.cursor.js'
 import Button from '../../../../../components/Button/Button'
 import Error from '../../../../../../resources/icons/error.svg'
 import {
@@ -46,6 +47,9 @@ export default memo(function WaveForm(props) {
                 RegionsPlugin.create({
                     dragSelection: props.editable,
                     slop: 5
+                }),
+                CursorPlugin.create({
+                    opacity: 0.5,
                 })
             ]
         })
