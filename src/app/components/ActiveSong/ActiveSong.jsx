@@ -84,7 +84,7 @@ export default function ActiveSong(props) {
             </div>
             <div className="Vamp-footer ActiveSong-footer">
                 <p className="ActiveSong-zoom-text">Zoom</p>
-                <input type="range" min={0} step={10} max={120} value={zoom} onChange={event => setZoom(Number(event.target.value))} />
+                <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={zoom} onChange={event => setZoom(Number(event.target.value))} />
             </div>
         </div>
     )

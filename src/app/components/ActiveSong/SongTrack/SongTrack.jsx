@@ -38,7 +38,7 @@ export default memo(function SongTrack(props) {
 
     return (<div className="SongTrack">
         <p className="SongTrack-title">{props.track.name}</p>
-        <input className="SongTrack-volume" type="range" min="0" max="1" value={props.track.volume} step="0.01"
+        <input className="Vamp-slider SongTrack-volume" type="range" min="0" max="1" value={props.track.volume} step="0.01"
                onChange={event => {
                    onVolumeChange(props.track, event.target.value)
                }}/>
