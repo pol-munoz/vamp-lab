@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useRef, useState} from 'react'
+import React, {memo, useContext, useEffect, useRef, useState} from 'react'
 import './WaveForm.css'
 import WaveSurfer from 'wavesurfer.js'
 import RegionsPlugin from 'wavesurfer.js/dist/plugin/wavesurfer.regions.js'
@@ -11,10 +11,12 @@ import {
     UPDATE_VAMP_IN_ACTIVE_SONG
 } from '../../ActiveSongReducer'
 import Vamp from '../../../../../model/Vamp'
+import {SyncContext} from './SyncContext'
 
 export default memo(function WaveForm(props) {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const sync = useContext(SyncContext)
     const containerRef = useRef()
     const waveSurferRef = useRef()
 
@@ -36,7 +38,7 @@ export default memo(function WaveForm(props) {
             partialRender: true,
             fillParent: true,
             responsive: 0,
-            minPxPerSec: props.zoom,
+            minPxPerSec: sync.zoom.zoom,
             waveColor: '#888',
             progressColor: '#444',
             cursorColor: '#222',
@@ -57,7 +59,7 @@ export default memo(function WaveForm(props) {
             setError(true)
         })
         waveSurfer.on('seek', progress => {
-            props.setLastPos(progress)
+            sync.lastPos.setLastPos(progress)
         })
         waveSurfer.on('region-updated', region => {
             // TODO Check boundaries?
@@ -100,10 +102,10 @@ export default memo(function WaveForm(props) {
 
     // Play update
     useEffect(() => {
-        if (waveSurferRef.current && waveSurferRef.current.isPlaying() !== props.playing) {
+        if (waveSurferRef.current && waveSurferRef.current.isPlaying() !== sync.playing.playing) {
             waveSurferRef.current.playPause()
         }
-    }, [props.playing, loading])
+    }, [sync.playing.playing, loading])
 
     // Device update
     useEffect(() => {
@@ -134,7 +136,7 @@ export default memo(function WaveForm(props) {
                     ...vamp,
                     drag: props.editable,
                     resize: props.editable,
-                    color: vamp.loop ? 'rgba(226, 68, 98, 0.6)' : 'rgba(0, 0, 0, 0.1)',
+                    color: vamp.loop ? 'rgba(226, 68, 98, 0.6)' : 'rgba(0, 0, 0, 0.15)',
                 })
             })
         }
@@ -142,14 +144,14 @@ export default memo(function WaveForm(props) {
 
     // Zoom update
     useEffect(() => {
-        waveSurferRef.current?.zoom(props.zoom)
+        waveSurferRef.current?.zoom(sync.zoom.zoom)
         // TODO maybe update based on props.duration to add extra space if needed -> careful not to break stuff
-    }, [props.zoom, loading])
+    }, [sync.zoom.zoom, loading])
 
     // Position update
     useEffect(() => {
-        waveSurferRef.current?.seekAndCenter(props.lastPos)
-    }, [props.lastPos, loading])
+        waveSurferRef.current?.seekAndCenter(sync.lastPos.lastPos)
+    }, [sync.lastPos.lastPos, loading])
 
     let classes = 'WaveForm'
 

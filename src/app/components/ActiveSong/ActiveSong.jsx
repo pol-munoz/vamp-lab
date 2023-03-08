@@ -9,25 +9,24 @@ import Pause from '../../../../resources/icons/pause.svg'
 import Stop from '../../../../resources/icons/stop.svg'
 import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
 import SongTrack from './SongTrack/SongTrack'
+import SyncProvider, {SyncContext} from './SongTrack/WaveForm/SyncContext'
 
 export default function ActiveSong(props) {
-
-    const [playing, setPlaying] = useState(false)
-    const [lastPos, setLastPos] = useState(0.0)
-    const [zoom, setZoom] = useState(0.0)
     const {state, dispatch} = useContext(StoreContext)
+    const sync = useContext(SyncContext)
+
     const navigate = useNavigate()
     const editable = state.editingSong
 
     const song = state.activeProject.songs[state.activeSongId]
 
     const onPlayPause = () => {
-        setPlaying(!playing)
-        setLastPos(Math.max(lastPos, 0.0001))
+        sync.playing.setPlaying(!sync.playing.playing)
+        sync.lastPos.setLastPos(Math.max(sync.lastPos.lastPos, 0.0001))
     }
     const onStop = () => {
-        setPlaying(false)
-        setLastPos(0)
+        sync.playing.setPlaying(false)
+        sync.lastPos.setLastPos(0)
     }
 
     const addTrack = async () => {
@@ -47,8 +46,7 @@ export default function ActiveSong(props) {
 
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices} vamps={song.vamps}
-                   editable={editable} playing={playing} duration={longestTrack.duration}
-                   zoom={zoom} lastPos={lastPos} setLastPos={setLastPos}/>
+                   editable={editable} duration={longestTrack.duration}/>
     )) ?? []
 
     return (
@@ -70,7 +68,7 @@ export default function ActiveSong(props) {
                     ) : null}
                     <Button className="Vamp-snug-button-right" transparent circle
                             onClick={onPlayPause}>
-                        {playing ? <Pause/> : <Play/>}
+                        {sync.playing.playing ? <Pause/> : <Play/>}
                     </Button>
                     <Button className="Vamp-snug-button-right" transparent circle
                             onClick={onStop}>
@@ -84,7 +82,7 @@ export default function ActiveSong(props) {
             </div>
             <div className="Vamp-footer ActiveSong-footer">
                 <p className="ActiveSong-zoom-text">Zoom</p>
-                <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={zoom} onChange={event => setZoom(Number(event.target.value))} />
+                <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={sync.zoom.zoom} onChange={event => sync.zoom.setZoom(Number(event.target.value))} />
             </div>
         </div>
     )
