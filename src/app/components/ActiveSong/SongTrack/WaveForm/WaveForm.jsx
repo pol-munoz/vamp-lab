@@ -34,6 +34,8 @@ export default memo(function WaveForm(props) {
             cursorWidth: 0,
             interact: props.editable,
             partialRender: true,
+            fillParent: true,
+            responsive: 0,
             minPxPerSec: props.zoom,
             waveColor: '#888',
             progressColor: '#444',
