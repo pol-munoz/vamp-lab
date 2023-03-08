@@ -34,3 +34,8 @@
   border: none;
   border-radius: 0 0 0.3rem 0.3rem;
 }
+
+.szh-menu__item:first-of-type:last-of-type {
+  border: none;
+  border-radius: 0.3rem;
+}

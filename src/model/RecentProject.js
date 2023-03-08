@@ -7,13 +7,13 @@ export default class RecentProject {
     }
 
     static from(data) {
-        return Object.assign(new RecentProject(), data);
+        return Object.assign(new RecentProject(), data)
     }
 
     static fromArray(array) {
         if (!array) {
             return []
         }
-        return array.map(RecentProject.from);
+        return array.map(RecentProject.from)
     }
 }

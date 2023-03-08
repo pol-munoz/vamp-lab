@@ -8,19 +8,28 @@
   text-align: center;
 }
 
-.Vamp-header {
+.Vamp-header, .Vamp-footer {
   background: var(--bg-color-light);
-  border-bottom: 1px solid var(--border-color-light);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   padding: 1rem;
   position: relative;
-  z-index: 1000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.Vamp-header {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid var(--border-color-light);
+  z-index: 1000;
   min-height: 4rem;
+}
+
+.Vamp-footer {
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.4);
+  border-top: 1px solid var(--border-color-light);
+  z-index: 999;
 }
 
 .Vamp-row {
@@ -47,7 +56,48 @@
    border-bottom: 1px solid var(--border-color);
 }
 
-.Vamp-back {
-  font-size: 1.2rem;
-  margin: -0.5rem 0 -0.5rem -0.5rem;  /* A bit hacky for my taste, but this way it fits better into its environment */
+/* A bit hacky for my taste, but this way it fits better into its environment */
+.Vamp-snug-button-left {
+  margin: -0.5rem 0 -0.5rem -0.5rem;
+}
+.Vamp-snug-button-right {
+  margin: -0.5rem -0.5rem -0.5rem 0;
+}
+
+.Vamp-slider {
+  accent-color: var(--primary);
+  cursor: pointer;
+  outline-offset: 0.5rem;
+  border-radius: 100vmax;
+  height: 10px;
+}
+
+.Vamp-slider:focus-visible {
+  outline: 2px solid rgba(255, 128, 128, 0.4);
+}
+
+.Vamp-checkbox {
+  accent-color: var(--primary);
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.Vamp-menu-text {
+  margin: 0;
+}
+
+.Vamp-menu-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-right: 0.4rem !important;
+}
+
+.Vamp-menu-button:not([disabled]):hover, .Vamp-menu-button:not([disabled]):focus-visible {
+  transform: scale(1.02) !important;
+}
+.Vamp-menu-button:not([disabled]):active {
+  transform: scale(1) !important;
 }

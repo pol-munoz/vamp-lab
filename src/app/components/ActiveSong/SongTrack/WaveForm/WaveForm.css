@@ -1,0 +1,44 @@
+.WaveForm {
+  position: relative;
+  overflow: hidden;
+  margin-right: -1rem;
+}
+.WaveForm-zoom-out > * {
+  overflow: hidden !important;
+}
+
+.WaveForm > *::-webkit-scrollbar {
+  height: 0.5rem;
+  background: rgba(0,0,0,0.1);
+}
+.WaveForm > *::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.4);
+}
+
+.WaveForm-placeholder, .WaveForm-error {
+  margin: 0;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.WaveForm-placeholder {
+  opacity: 0.4;
+  font-size: 1rem;
+}
+
+.WaveForm-error {
+  cursor: pointer;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.WaveForm-error-text {
+  margin: 0;
+}
+
+.WaveForm-error:not([disabled]):active {
+  transform: translateY(-50%) translateX(-50%) scale(0.95) !important;
+}

@@ -1,5 +1,6 @@
 import Song from '../../../model/Song'
-import {addReducer, addStateReactor} from '../../RootReducer'
+import {addReducer} from '../../RootReducer'
+import {PERSIST_ACTIVE_PROJECT_ACTION} from '../../VampLabReducer'
 
 const activeProjectReducer = (draft, action) => {
     switch (action.type) {
@@ -22,16 +23,7 @@ const activeProjectReducer = (draft, action) => {
             break
     }
 }
-const activeProjectStateReactor = (newState, action) => {
-    if (action.type.startsWith(PERSIST_ACTIVE_PROJECT_ACTION)) {
-        window.activeProject.save(newState.activeProject)
-    }
-}
-
 addReducer(activeProjectReducer)
-addStateReactor(activeProjectStateReactor)
-
-export const PERSIST_ACTIVE_PROJECT_ACTION = '_VAMP_PAPA_'
 
 export const SET_ACTIVE_PROJECT = 'setActiveProject'
 export const ADD_SONG_TO_ACTIVE_PROJECT = PERSIST_ACTIVE_PROJECT_ACTION + 'addSongToActiveProject'

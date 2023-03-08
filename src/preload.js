@@ -1,6 +1,6 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
-import { contextBridge, ipcRenderer } from 'electron'
+import {contextBridge, ipcMain, ipcRenderer} from 'electron'
 
 contextBridge.exposeInMainWorld('darkMode', {
     toggle: () => ipcRenderer.invoke('dark-mode:toggle'),
@@ -22,4 +22,9 @@ contextBridge.exposeInMainWorld('activeProject', {
     promptSongName: () => ipcRenderer.invoke('activeProject:promptSongName'),
     promptSongRename: name => ipcRenderer.invoke('activeProject:promptSongRename', name),
     promptConfirmDeleteSong: name => ipcRenderer.invoke('activeProject:promptConfirmDeleteSong', name),
+})
+
+contextBridge.exposeInMainWorld('activeSong', {
+    promptOpenTrack: () => ipcRenderer.invoke('activeSong:promptOpenTrack'),
+    promptUpdateTrack: id => ipcRenderer.invoke('activeSong:promptUpdateTrack', id),
 })

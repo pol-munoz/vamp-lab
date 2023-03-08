@@ -7,6 +7,7 @@ import RecentProjects from './components/RecentProjects/RecentProjects'
 import ActiveProject from './components/ActiveProject/ActiveProject'
 import StoreProvider from './StoreContext'
 import ActiveSong from './components/ActiveSong/ActiveSong'
+import SyncProvider from './components/ActiveSong/SongTrack/WaveForm/SyncContext'
 
 function render() {
     const domNode = document.getElementById('root')
@@ -22,9 +23,10 @@ function render() {
         },
         {
             path: '/project/song',
-            element: <ActiveSong/>,
+            element: <SyncProvider><ActiveSong/></SyncProvider>,
         },
     ])
+
     root.render(
         <StoreProvider>
             <RouterProvider router={router}/>

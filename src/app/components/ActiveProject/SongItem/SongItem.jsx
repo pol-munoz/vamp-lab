@@ -3,10 +3,10 @@ import './SongItem.css'
 
 import Bin from '../../../../../resources/icons/bin.svg'
 import TextCursor from '../../../../../resources/icons/textCursor.svg'
-import Play from '../../../../../resources/icons/Play.svg'
+import Play from '../../../../../resources/icons/play.svg'
 import Pencil from '../../../../../resources/icons/pencil.svg'
-import Button from '../../../../components/Button/Button'
 import Kebab from '../../../../../resources/icons/kebab.svg'
+import Button from '../../../../components/Button/Button'
 import {Menu, MenuItem} from '@szhsin/react-menu'
 import '@szhsin/react-menu/dist/core.css'
 import '@szhsin/react-menu/dist/transitions/slide.css'
@@ -23,8 +23,6 @@ export default function SongItem(props) {
                     <Pencil/>
                 </Button>
                 <Menu transition arrow
-                      className="Dropdown-container"
-                      menuClassName="Dropdown"
                       viewScroll="auto"
                       align="end"
                       menuButton={
@@ -33,15 +31,15 @@ export default function SongItem(props) {
                           </Button>
                       }
                 >
-                    <MenuItem className="Dropdown-item" onClick={() => props.onRenameClick(props.song)}>
-                        <Button className="SongItem-menu-button" transparent>
-                            <p className="SongItem-menu-text">Rename</p>
+                    <MenuItem onClick={() => props.onRenameClick(props.song)}>
+                        <Button className="Vamp-menu-button" transparent>
+                            <p className="Vamp-menu-text">Rename</p>
                             <TextCursor/>
                         </Button>
                     </MenuItem>
-                    <MenuItem className="Dropdown-item" onClick={() => props.onDeleteClick(props.song)}>
-                        <Button className="SongItem-menu-button" transparent destructive>
-                            <p className="SongItem-menu-text">Delete</p>
+                    <MenuItem onClick={() => props.onDeleteClick(props.song)}>
+                        <Button className="Vamp-menu-button" transparent destructive>
+                            <p className="Vamp-menu-text">Delete</p>
                             <Bin/>
                         </Button>
                     </MenuItem>

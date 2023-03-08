@@ -24,7 +24,8 @@ export default function ActiveProject() {
 
         if (!!name && !!name.trim()) {
             dispatch({
-                type: ADD_SONG_TO_ACTIVE_PROJECT, payload: {name}
+                type: ADD_SONG_TO_ACTIVE_PROJECT,
+                payload: {name}
             })
             navigateToSong()
         }
@@ -35,7 +36,8 @@ export default function ActiveProject() {
 
         if (!!name && !!name.trim() && name !== song.name) {
             dispatch({
-                type: RENAME_SONG_IN_ACTIVE_PROJECT, payload: {id, name}
+                type: RENAME_SONG_IN_ACTIVE_PROJECT,
+                payload: {id, name}
             })
         }
     }
@@ -43,7 +45,8 @@ export default function ActiveProject() {
     const playSong = song => {
         const id = song.id
         dispatch({
-            type: SET_ACTIVE_SONG_PLAYING, payload: {id}
+            type: SET_ACTIVE_SONG_PLAYING,
+            payload: {id}
         })
         navigateToSong()
     }
@@ -51,7 +54,8 @@ export default function ActiveProject() {
     const editSong = song => {
         const id = song.id
         dispatch({
-            type: SET_ACTIVE_SONG_EDITING, payload: {id}
+            type: SET_ACTIVE_SONG_EDITING,
+            payload: {id}
         })
         navigateToSong()
     }
@@ -61,11 +65,11 @@ export default function ActiveProject() {
         if (confirm) {
             const id = song.id
             dispatch({
-                type: DELETE_SONG_FROM_ACTIVE_PROJECT, payload: {id}
+                type: DELETE_SONG_FROM_ACTIVE_PROJECT,
+                payload: {id}
             })
         }
     }
-
 
     const songs = Object.entries(state.activeProject?.songs).map(entry => {
         const [_, song] = entry
@@ -78,7 +82,7 @@ export default function ActiveProject() {
         <div className="Vamp-screen">
             <div className="Vamp-header">
                 <div className="Vamp-row">
-                    <Button className="Vamp-back" transparent circle
+                    <Button className="Vamp-snug-button-left" transparent circle
                             onClick={() => navigate(-1)}>
                         <ChevronLeft/>
                     </Button>

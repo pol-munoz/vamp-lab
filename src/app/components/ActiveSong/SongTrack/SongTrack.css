@@ -1,0 +1,46 @@
+.SongTrack {
+  display: grid;
+  grid-template:  "volume title . tools" auto
+                  "volume track track track" 1fr /
+                  auto auto 1fr auto;
+  padding: 1rem;
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  align-items: center;
+}
+
+.SongTrack-track {
+  grid-area: track;
+}
+
+.SongTrack-title {
+  grid-area: title;
+  margin: 0;
+}
+.SongTrack-tools {
+  grid-area: tools;
+}
+
+.SongTrack-volume {
+  grid-area: volume;
+  -webkit-appearance: slider-vertical;
+  width: 10px;
+  height: 100%;
+  margin: 0 0.5rem 0 0.25rem;
+}
+
+.SongTrack-device {
+  outline: none;
+  color: var(--text-color);
+  padding: 0.3rem 0.4rem 0.3rem 0.7rem;
+  border-radius: 100vmax;
+  border: none;
+  font-size: 0.9rem;
+  border-right: 0.7rem solid transparent;
+  background: rgba(255, 128, 128, 0.1);
+  cursor: pointer;
+}
+
+.SongTrack-device:not([disabled]):hover, .SongTrack-device:not([disabled]):focus-visible {
+  background: rgba(255, 128, 128, 0.2);
+}

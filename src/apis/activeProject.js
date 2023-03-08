@@ -2,8 +2,6 @@ import {app, BrowserWindow, dialog, ipcMain} from 'electron'
 import {promises as fs} from 'fs'
 import {SKIP_CONFIRM_DELETE_SONG_STORE_KEY, store} from './store'
 
-const prompt = __non_webpack_require__('custom-electron-prompt')
-
 async function saveActiveProject(_, project) {
     const json = JSON.stringify(project, null, 2)
 
@@ -13,6 +11,8 @@ async function saveActiveProject(_, project) {
     })
 }
 async function promptSongName() {
+    const prompt = __non_webpack_require__('custom-electron-prompt')
+
     return await prompt({
         title: "Enter the song's name",
         label: "Enter the song's name:",
@@ -20,6 +20,8 @@ async function promptSongName() {
     }, BrowserWindow.getFocusedWindow())
 }
 async function promptSongRename(_, name) {
+    const prompt = __non_webpack_require__('custom-electron-prompt')
+
     return await prompt({
         title: "Enter the song's new name",
         label: "Enter the song's new name:",
