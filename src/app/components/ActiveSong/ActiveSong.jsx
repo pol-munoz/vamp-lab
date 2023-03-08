@@ -80,9 +80,15 @@ export default function ActiveSong(props) {
                 {tracks.length > 0 ? tracks :
                     <p className="Vamp-placeholder">This song's tracks will appear here</p>}
             </div>
-            <div className="Vamp-footer ActiveSong-footer">
-                <p className="ActiveSong-zoom-text">Zoom</p>
-                <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={sync.zoom.zoom} onChange={event => sync.zoom.setZoom(Number(event.target.value))} />
+            <div className="Vamp-footer">
+                <div className="Vamp-row">
+                    <p className="ActiveSong-zoom-text">Sync scroll between tracks</p>
+                    <input className="Vamp-checkbox" type="checkbox" checked={sync.scroll.enabled} onChange={event => sync.scroll.setEnabled(Boolean(event.target.checked))} />
+                </div>
+                <div className="Vamp-row">
+                    <p className="ActiveSong-zoom-text">Zoom</p>
+                    <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={sync.zoom.zoom} onChange={event => sync.zoom.setZoom(Number(event.target.value))} />
+                </div>
             </div>
         </div>
     )

@@ -76,6 +76,12 @@
   outline: 2px solid rgba(255, 128, 128, 0.4);
 }
 
+.Vamp-checkbox {
+  accent-color: var(--primary);
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .Vamp-menu-text {
   margin: 0;
 }

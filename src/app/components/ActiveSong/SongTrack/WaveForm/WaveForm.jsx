@@ -49,7 +49,7 @@ export default memo(function WaveForm(props) {
                     slop: 5
                 }),
                 CursorPlugin.create({
-                    opacity: 0.5,
+                    opacity: props.editable ? 0.5 : 0,
                 })
             ]
         })
@@ -57,6 +57,7 @@ export default memo(function WaveForm(props) {
         waveSurfer.load('vamp://' + props.track.path)
         waveSurfer.on('ready', () => {
             waveSurferRef.current = waveSurfer
+            waveSurferRef.current.peaksBackup = waveSurferRef.current.backend.mergedPeaks
             setLoading(false)
         })
         waveSurfer.on('error', () => {
@@ -65,6 +66,9 @@ export default memo(function WaveForm(props) {
         })
         waveSurfer.on('seek', progress => {
             sync.lastPos.setLastPos(progress)
+        })
+        waveSurfer.on('scroll', event => {
+            sync.scroll.setScroll(event.target.scrollLeft)
         })
         waveSurfer.on('region-updated', region => {
             // TODO Check boundaries?
@@ -150,13 +154,19 @@ export default memo(function WaveForm(props) {
     // Zoom update
     useEffect(() => {
         waveSurferRef.current?.zoom(sync.zoom.zoom)
-        // TODO maybe update based on props.duration to add extra space if needed -> careful not to break stuff
     }, [sync.zoom.zoom, loading])
 
     // Position update
     useEffect(() => {
         waveSurferRef.current?.seekAndCenter(sync.lastPos.lastPos)
     }, [sync.lastPos.lastPos, loading])
+
+    // Scroll update
+    useEffect(() => {
+        if (sync.scroll.enabled && containerRef.current) {
+            containerRef.current.firstElementChild.scrollLeft = sync.scroll.scroll
+        }
+    }, [sync.scroll.scroll, sync.scroll.enabled, loading])
 
     let classes = 'WaveForm'
 
@@ -167,6 +177,7 @@ export default memo(function WaveForm(props) {
     if (sync.zoom.zoom === 0) {
         classes += ' WaveForm-zoom-out'
     }
+
 
     return (
         <div ref={containerRef} className={classes}>
