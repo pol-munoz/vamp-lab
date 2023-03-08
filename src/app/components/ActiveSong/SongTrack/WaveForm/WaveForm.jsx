@@ -31,10 +31,13 @@ export default memo(function WaveForm(props) {
     useEffect(() => {
         const waveSurfer = WaveSurfer.create({
             container: containerRef.current,
-            responsive: 50,
             cursorWidth: 0,
-            interact: false,
+            interact: props.editable,
             partialRender: true,
+            minPxPerSec: props.zoom,
+            waveColor: '#888',
+            progressColor: '#444',
+            cursorColor: '#222',
             plugins: [
                 RegionsPlugin.create({
                     dragSelection: props.editable
@@ -50,6 +53,9 @@ export default memo(function WaveForm(props) {
         waveSurfer.on('error', () => {
             setLoading(false)
             setError(true)
+        })
+        waveSurfer.on('seek', progress => {
+            props.setLastPos(progress)
         })
         waveSurfer.on('region-updated', region => {
             // TODO Check boundaries?
@@ -70,6 +76,7 @@ export default memo(function WaveForm(props) {
             }
         })
         waveSurfer.on('region-click', (region, event) => {
+            event.stopPropagation()
             const vamp = Vamp.from(region)
             if (props.editable && event.altKey) {
                 region.remove()
@@ -89,35 +96,19 @@ export default memo(function WaveForm(props) {
         return () => waveSurfer.destroy()
     }, [props.track.path])
 
-    useEffect(() => {
-        waveSurferRef.current?.drawBuffer()
-    }, [props.duration, loading])
-
+    // Play update
     useEffect(() => {
         if (waveSurferRef.current && waveSurferRef.current.isPlaying() !== props.playing) {
             waveSurferRef.current.playPause()
         }
     }, [props.playing, loading])
 
+    // Device update
     useEffect(() => {
         waveSurferRef.current?.setSinkId(props.track.device)
     }, [props.track.device, loading])
 
-    useEffect(() => {
-        if (waveSurferRef.current) {
-            waveSurferRef.current.clearRegions()
-            Object.entries(props.vamps).forEach(entry => {
-                const [_, vamp] = entry
-                waveSurferRef.current.addRegion({
-                    ...vamp,
-                    drag: props.editable,
-                    resize: props.editable,
-                    color: vamp.loop ? 'rgba(226, 68, 98, 0.5)' : 'rgba(0, 0, 0, 0.1)'
-                })
-            })
-        }
-    }, [props.vamps, loading])
-
+    // Volume update
     useEffect(() => {
         if (waveSurferRef.current && waveSurferRef.current.getVolume() !== props.track.volume) {
             waveSurferRef.current.setVolume(props.track.volume)
@@ -129,17 +120,41 @@ export default memo(function WaveForm(props) {
         }
     }, [props.track.volume, loading])
 
+    // Vamps update
+    useEffect(() => {
+        if (waveSurferRef.current) {
+            waveSurferRef.current.clearRegions()
+            Object.entries(props.vamps).forEach(entry => {
+                const [_, vamp] = entry
+                waveSurferRef.current.addRegion({
+                    ...vamp,
+                    drag: props.editable,
+                    resize: props.editable,
+                    color: vamp.loop ? 'rgba(226, 68, 98, 0.6)' : 'rgba(0, 0, 0, 0.1)',
+                })
+            })
+        }
+    }, [props.vamps, loading])
+
+    // Zoom update
+    useEffect(() => {
+        waveSurferRef.current?.zoom(props.zoom)
+        // TODO maybe update based on props.duration to add extra space if needed -> careful not to break stuff
+    }, [props.zoom, loading])
+
+    // Position update
+    useEffect(() => {
+        waveSurferRef.current?.seekAndCenter(props.lastPos)
+    }, [props.lastPos, loading])
+
     let classes = 'WaveForm'
 
     if (props.className) {
         classes += ` ${props.className}`
     }
 
-    const widthPercentage = (props.track.duration / props.duration) * 100
     return (
-        <div className={classes} style={{paddingRight: `${100 - widthPercentage}%`}}>
-            <div ref={containerRef}>
-            </div>
+        <div ref={containerRef} className={classes}>
             {loading ? <p className="WaveForm-placeholder">Loading...</p> : null}
             {error ?
                 <Button onClick={onReselectClick} className="WaveForm-error" transparent rounded destructive>

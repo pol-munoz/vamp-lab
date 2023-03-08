@@ -34,7 +34,7 @@ const createWindow = () => {
     })
 
     mainWindow.setBounds(store.get(BOUNDS_STORE_KEY))
-    mainWindow.setMinimumSize(500, 300)
+    mainWindow.setMinimumSize(500, 350)
 
     mainWindow.on('close', () => {
         store.set(BOUNDS_STORE_KEY, mainWindow.getBounds())

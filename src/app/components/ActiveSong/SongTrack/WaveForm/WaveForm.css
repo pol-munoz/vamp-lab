@@ -1,6 +1,15 @@
 .WaveForm {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  margin-right: -1rem;
+}
+
+.WaveForm > *::-webkit-scrollbar {
+  height: 0.5rem;
+  background: rgba(0,0,0,0.1);
+}
+.WaveForm > *::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.4);
 }
 
 .WaveForm-placeholder, .WaveForm-error {
