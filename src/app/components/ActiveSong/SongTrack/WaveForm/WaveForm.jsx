@@ -107,7 +107,9 @@ export default memo(function WaveForm(props) {
 
     // Device update
     useEffect(() => {
-        waveSurferRef.current?.setSinkId(props.track.device)
+        waveSurferRef.current?.setSinkId(props.track.device).catch(e => {
+            waveSurferRef.current?.setSinkId('default')
+        })
     }, [props.track.device, loading])
 
     // Volume update

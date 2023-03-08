@@ -14,14 +14,14 @@ import '@szhsin/react-menu/dist/transitions/slide.css'
 import WaveForm from './WaveForm/WaveForm'
 
 export default memo(function SongTrack(props) {
-    const onVolumeChange = (trackId, volume) => {
+    const onVolumeChange = (track, volume) => {
         props.dispatch({
-            type: SET_TRACK_VOLUME_IN_ACTIVE_SONG, payload: {trackId, volume}
+            type: SET_TRACK_VOLUME_IN_ACTIVE_SONG, payload: {track, volume}
         })
     }
-    const onDeviceChange = (trackId, device) => {
+    const onDeviceChange = (track, device) => {
         props.dispatch({
-            type: SET_TRACK_DEVICE_IN_ACTIVE_SONG, payload: {trackId, device}
+            type: SET_TRACK_DEVICE_IN_ACTIVE_SONG, payload: {track, device}
         })
     }
     const onDeleteTrack = track => {
@@ -40,12 +40,12 @@ export default memo(function SongTrack(props) {
         <p className="SongTrack-title">{props.track.name}</p>
         <input className="SongTrack-volume" type="range" min="0" max="1" value={props.track.volume} step="0.01"
                onChange={event => {
-                   onVolumeChange(props.track.id, event.target.value)
+                   onVolumeChange(props.track, event.target.value)
                }}/>
         <div className="Vamp-row SongTrack-tools">
             <select className="SongTrack-device" value={props.track.device}
                     onChange={event => {
-                        onDeviceChange(props.track.id, event.target.value)
+                        onDeviceChange(props.track, event.target.value)
                     }}>
                 {options}
             </select>

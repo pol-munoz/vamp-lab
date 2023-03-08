@@ -21,10 +21,10 @@ const activeSongReducer = (draft, action) => {
             delete draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id]
             break
         case SET_TRACK_VOLUME_IN_ACTIVE_SONG:
-            draft.activeProject.songs[draft.activeSongId].tracks[action.payload.trackId].volume = action.payload.volume
+            draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id].volume = action.payload.volume
             break
         case SET_TRACK_DEVICE_IN_ACTIVE_SONG:
-            draft.activeProject.songs[draft.activeSongId].tracks[action.payload.trackId].device = action.payload.device
+            draft.activeProject.songs[draft.activeSongId].tracks[action.payload.track.id].device = action.payload.device
             break
         case ADD_VAMP_TO_ACTIVE_SONG:
             draft.activeProject.songs[draft.activeSongId].vamps[action.payload.vamp.id] = action.payload.vamp
