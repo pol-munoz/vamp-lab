@@ -1509,7 +1509,7 @@
     "@svgr/plugin-jsx" "^6.5.1"
     "@svgr/plugin-svgo" "^6.5.1"
 
-"@szhsin/react-menu@^3.5.1":
+"@szhsin/react-menu@3.5.1":
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/@szhsin/react-menu/-/react-menu-3.5.1.tgz#6b27ef3da7c2218d6772bc2aa0522edf4a96b3a9"
   integrity sha512-bTCfVNBSReG4+mnbN8n2OQWZ3DRPlJgMIBJFepPfDLiRzNSe5lbZ8Z5Kjiv9nuPLHOu3jSaybxgYJj/Dn8n75Q==

@@ -37,7 +37,7 @@
     "style-loader": "^3.0.0"
   },
   "dependencies": {
-    "@szhsin/react-menu": "^3.5.1",
+    "@szhsin/react-menu": "3.5.1",
     "custom-electron-prompt": "^1.5.1",
     "electron-regedit": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",

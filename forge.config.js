@@ -16,7 +16,10 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        author: 'pulmunyi',
+        description: 'Vamp management software for musical theatre plays'
+      },
     },
     {
       name: '@electron-forge/maker-dmg',

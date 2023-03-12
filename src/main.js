@@ -78,7 +78,10 @@ app.on('ready', async () => {
     const protocolName = 'vamp'
 
     protocol.registerFileProtocol(protocolName, (request, callback) => {
-        const url = request.url.replace(`${protocolName}://`, '')
+        let url = request.url.replace(`${protocolName}://`, '')
+        if (process.platform === 'win32') {
+            url = url.slice(0, 1).toUpperCase() + ':' + url.slice(1)
+        }
         try {
             return callback(decodeURIComponent(url))
         } catch (error) {

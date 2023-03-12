@@ -44,3 +44,7 @@
 .SongTrack-device:not([disabled]):hover, .SongTrack-device:not([disabled]):focus-visible {
   background: rgba(255, 128, 128, 0.2);
 }
+
+.SongTrack-device > option {
+  background-color: var(--bg-color-light);
+}
