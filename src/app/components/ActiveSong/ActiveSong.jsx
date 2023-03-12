@@ -47,11 +47,9 @@ export default function ActiveSong(props) {
 
     let trackData = Object.entries(song.tracks).map(entry => entry[1])
 
-    let longestTrack = trackData.reduce((a, b) => a.duration > b.duration ? a : b, 0)
-
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices} vamps={song.vamps}
-                   editable={editable} duration={longestTrack.duration}/>
+                   editable={editable} />
     )) ?? []
 
     return (
