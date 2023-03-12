@@ -1,3 +1,7 @@
-.ActiveSong-zoom-text {
+.ActiveSong-text {
   margin: 0;
+}
+
+.ActiveSong-checkbox-wrapper {
+  cursor: pointer;
 }

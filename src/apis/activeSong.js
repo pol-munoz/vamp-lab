@@ -9,16 +9,9 @@ const MUSIC_FILTER = {
 
 async function processTrackResult(res) {
     if (!res.canceled) {
-        const {getAudioDurationInSeconds} = __non_webpack_require__('get-audio-duration')
-        const ffprobePath = __non_webpack_require__('@ffprobe-installer/ffprobe').path.replace(
-            'app.asar',
-            'app.asar.unpacked'
-        )
-
         const filePath = res.filePaths[0]
         const name = path.basename(filePath, path.extname(filePath))
-        const duration = await getAudioDurationInSeconds(filePath, ffprobePath)
-        return new Track(name, filePath, duration)
+        return new Track(name, filePath)
     }
     // Returns undefined on cancel
 }
@@ -44,7 +37,18 @@ async function promptUpdateTrack(_, id) {
 }
 
 
+async function showHelp() {
+    void dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {
+        type: 'info',
+        title: 'Editing songs',
+        message: 'Vamps are regions you can loop',
+        detail: 'Create vamp: Drag on a track\nMove/resize vamp: Drag\nToggle vamp loop: Click\nDelete vamp: Alt-click'
+    })
+}
+
+
 app.whenReady().then(() => {
     ipcMain.handle('activeSong:promptOpenTrack', promptOpenTrack)
     ipcMain.handle('activeSong:promptUpdateTrack', promptUpdateTrack)
+    ipcMain.on('activeSong:showHelp', showHelp)
 })

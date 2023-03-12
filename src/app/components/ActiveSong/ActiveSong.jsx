@@ -1,5 +1,5 @@
 import './ActiveSong.css'
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {StoreContext} from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
 import Button from '../../../components/Button/Button'
@@ -7,9 +7,10 @@ import ChevronLeft from '../../../../resources/icons/chevronLeft.svg'
 import Play from '../../../../resources/icons/play.svg'
 import Pause from '../../../../resources/icons/pause.svg'
 import Stop from '../../../../resources/icons/stop.svg'
+import Help from '../../../../resources/icons/help.svg'
 import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
 import SongTrack from './SongTrack/SongTrack'
-import SyncProvider, {SyncContext} from './SongTrack/WaveForm/SyncContext'
+import {SyncContext} from './SongTrack/WaveForm/SyncContext'
 
 export default function ActiveSong(props) {
     const {state, dispatch} = useContext(StoreContext)
@@ -28,11 +29,15 @@ export default function ActiveSong(props) {
         sync.playing.setPlaying(false)
         sync.lastPos.setLastPos(0)
     }
+    const onHelp = () => {
+        window.activeSong.showHelp()
+    }
 
     const addTrack = async () => {
         const track = await window.activeSong.promptOpenTrack()
 
         if (track) {
+            onStop()
             dispatch({
                 type: ADD_TRACK_TO_ACTIVE_SONG,
                 payload: {track}
@@ -40,13 +45,11 @@ export default function ActiveSong(props) {
         }
     }
 
-    let trackData = Object.entries(song.tracks).map(entry => entry[1])
-
-    let longestTrack = trackData.reduce((a, b) => a.duration > b.duration ? a : b, 0)
+    let trackData = Object.entries(song?.tracks ?? {}).map(entry => entry[1])
 
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices} vamps={song.vamps}
-                   editable={editable} duration={longestTrack.duration}/>
+                   editable={editable} />
     )) ?? []
 
     return (
@@ -57,7 +60,7 @@ export default function ActiveSong(props) {
                             onClick={() => navigate(-1)}>
                         <ChevronLeft/>
                     </Button>
-                    <h3 className="Vamp-title">{state.activeProject.name} - {song.name}</h3>
+                    <h3 className="Vamp-title">{state.activeProject.name} - {song?.name}</h3>
                 </div>
                 <div className="Vamp-row">
                     {editable ? (
@@ -82,12 +85,22 @@ export default function ActiveSong(props) {
             </div>
             <div className="Vamp-footer">
                 <div className="Vamp-row">
-                    <p className="ActiveSong-zoom-text">Sync scroll between tracks</p>
-                    <input className="Vamp-checkbox" type="checkbox" checked={sync.scroll.enabled} onChange={event => sync.scroll.setEnabled(Boolean(event.target.checked))} />
+                    {editable ?
+                        <Button className="Vamp-snug-button-left" transparent circle
+                                onClick={onHelp}>
+                            <Help/>
+                        </Button>
+                        : undefined}
+                    <label className="Vamp-row ActiveSong-checkbox-wrapper">
+                        <p className="ActiveSong-text">Sync scroll between tracks</p>
+                        <input className="Vamp-checkbox" type="checkbox" checked={sync.scroll.enabled}
+                               onChange={event => sync.scroll.setEnabled(Boolean(event.target.checked))}/>
+                    </label>
                 </div>
                 <div className="Vamp-row">
-                    <p className="ActiveSong-zoom-text">Zoom</p>
-                    <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={sync.zoom.zoom} onChange={event => sync.zoom.setZoom(Number(event.target.value))} />
+                    <p className="ActiveSong-text">Zoom</p>
+                    <input className="Vamp-slider" type="range" min={0} step={10} max={120} value={sync.zoom.zoom}
+                           onChange={event => sync.zoom.setZoom(Number(event.target.value))}/>
                 </div>
             </div>
         </div>

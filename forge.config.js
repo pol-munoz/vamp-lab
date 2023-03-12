@@ -1,10 +1,14 @@
+const { spawn } = require('child_process')
+const fs = require('fs').promises
+const path = require('path')
+
+
 module.exports = {
   packagerConfig: {
-    icon: '/resources/icon',
-    extraResources: [
+    icon: 'resources/app/icon',
+    extraResource: [
         'resources/osx/vamp.icns',
         'resources/windows/vamp.ico',
-        'resources/prompt.css',
     ],
     extendInfo: 'resources/osx/Info.plist'
   },
@@ -12,7 +16,10 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        author: 'pulmunyi',
+        description: 'Vamp management software for musical theatre plays'
+      },
     },
     {
       name: '@electron-forge/maker-dmg',
@@ -59,4 +66,37 @@ module.exports = {
       },
     },
   ],
-};
+  hooks: {
+    packageAfterPrune: async (forgeConfig, buildPath) => {
+      let packages = []
+
+      await fs.rename(path.resolve(buildPath, 'package.json'), path.resolve(buildPath, 'tmp.json'))
+
+      const webpackConfigJs = require('./webpack.main.config.js')
+      Object.keys(webpackConfigJs.externals).forEach(pkg => {
+        packages.push(pkg)
+      })
+
+      return new Promise((resolve, reject) => {
+        const npmInstall = spawn('npm', ['i', '--legacy-peer-deps', ...packages], {
+          cwd: buildPath,
+          stdio: 'inherit',
+        })
+
+        npmInstall.on('close', async (code) => {
+          if (code === 0) {
+            await fs.rename(path.resolve(buildPath, 'tmp.json'), path.resolve(buildPath, 'package.json'))
+
+            resolve()
+          } else {
+            reject(new Error('process finished with error code ' + code))
+          }
+        })
+
+        npmInstall.on('error', (error) => {
+          reject(error)
+        })
+      })
+    }
+  }
+}
