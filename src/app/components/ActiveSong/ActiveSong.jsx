@@ -1,5 +1,5 @@
 import './ActiveSong.css'
-import React, {useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {StoreContext} from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
 import Button from '../../../components/Button/Button'
@@ -12,9 +12,16 @@ import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
 import SongTrack from './SongTrack/SongTrack'
 import {SyncContext} from './SongTrack/WaveForm/SyncContext'
 
+// FIXME: This is a quick fix for newly created active songs not reacting to track changes. The issue probably lies in the StoreContext
+function useForceUpdate(){
+    const [_, setValue] = useState(0)
+    return () => setValue(value => value + 1)
+}
+
 export default function ActiveSong(props) {
     const {state, dispatch} = useContext(StoreContext)
     const sync = useContext(SyncContext)
+    const forceUpdate = useForceUpdate()
 
     const navigate = useNavigate()
     const editable = state.editingSong
@@ -42,10 +49,11 @@ export default function ActiveSong(props) {
                 type: ADD_TRACK_TO_ACTIVE_SONG,
                 payload: {track}
             })
+            forceUpdate()
         }
     }
 
-    let trackData = Object.entries(song.tracks).map(entry => entry[1])
+    let trackData = Object.entries(song?.tracks ?? {}).map(entry => entry[1])
 
     const tracks = trackData.map(track => (
         <SongTrack key={track.id} dispatch={dispatch} track={track} devices={state.devices} vamps={song.vamps}
@@ -60,7 +68,7 @@ export default function ActiveSong(props) {
                             onClick={() => navigate(-1)}>
                         <ChevronLeft/>
                     </Button>
-                    <h3 className="Vamp-title">{state.activeProject.name} - {song.name}</h3>
+                    <h3 className="Vamp-title">{state.activeProject.name} - {song?.name}</h3>
                 </div>
                 <div className="Vamp-row">
                     {editable ? (
