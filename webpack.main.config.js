@@ -1,3 +1,5 @@
+const CopyPlugin = require('copy-webpack-plugin')
+
 module.exports = {
   /**
    * This is the main entry point for your application, it's the first file
@@ -8,4 +10,14 @@ module.exports = {
   module: {
     rules: require('./webpack.rules'),
   },
+  externals: {
+    'custom-electron-prompt': 'custom-electron-prompt',
+  },
+  plugins:  [
+    new CopyPlugin({
+      patterns: [
+        { from: "resources/prompt.css", to: "prompt.css" },
+      ],
+    }),
+  ]
 };
