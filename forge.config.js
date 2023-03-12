@@ -1,7 +1,7 @@
 module.exports = {
   packagerConfig: {
-    icon: '/resources/icon',
-    extraResources: [
+    icon: 'resources/app/icon',
+    extraResource: [
         'resources/osx/vamp.icns',
         'resources/windows/vamp.ico',
         'resources/prompt.css',

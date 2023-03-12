@@ -26,3 +26,5 @@ The following is a brief list of known issues to fix / improvements to make:
 * Add the ability to reorder songs in a project and tracks in a song.
 * Add a "play project" feature, to play all songs in a project one after another.
 * Improve behavior when tracks of different lengths are added to the same song.
+* Refactor how projects are handled so multiple can be open at once.
+* FIX: Projects can only be opened "natively" from the first screen.
