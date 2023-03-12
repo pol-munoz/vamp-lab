@@ -1,5 +1,5 @@
 import './ActiveSong.css'
-import React, {useContext, useState} from 'react'
+import React, {useContext} from 'react'
 import {StoreContext} from '../../StoreContext'
 import {useNavigate} from 'react-router-dom'
 import Button from '../../../components/Button/Button'
@@ -12,16 +12,9 @@ import {ADD_TRACK_TO_ACTIVE_SONG} from './ActiveSongReducer'
 import SongTrack from './SongTrack/SongTrack'
 import {SyncContext} from './SongTrack/WaveForm/SyncContext'
 
-// FIXME: This is a quick fix for newly created active songs not reacting to track changes. The issue probably lies in the StoreContext
-function useForceUpdate(){
-    const [_, setValue] = useState(0)
-    return () => setValue(value => value + 1)
-}
-
 export default function ActiveSong(props) {
     const {state, dispatch} = useContext(StoreContext)
     const sync = useContext(SyncContext)
-    const forceUpdate = useForceUpdate()
 
     const navigate = useNavigate()
     const editable = state.editingSong
@@ -49,7 +42,6 @@ export default function ActiveSong(props) {
                 type: ADD_TRACK_TO_ACTIVE_SONG,
                 payload: {track}
             })
-            forceUpdate()
         }
     }
 

@@ -9,7 +9,7 @@ const activeProjectReducer = (draft, action) => {
             break
         case ADD_SONG_TO_ACTIVE_PROJECT:
             const song = new Song(action.payload.name)
-            draft.activeProject.songs[song.id] = song
+            draft.activeProject.songs[song.id] = {...song}
             draft.activeSongId = song.id
             draft.editingSong = true
             break
