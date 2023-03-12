@@ -65,7 +65,6 @@ module.exports = {
   ],
   hooks: {
     packageAfterPrune: async (forgeConfig, buildPath) => {
-      console.log(buildPath)
       let packages = []
 
       await fs.rename(path.resolve(buildPath, 'package.json'), path.resolve(buildPath, 'tmp.json'))
@@ -75,7 +74,6 @@ module.exports = {
         packages.push(pkg)
       })
 
-      console.log(packages)
       return new Promise((resolve, reject) => {
         const npmInstall = spawn('npm', ['i', '--legacy-peer-deps', ...packages], {
           cwd: buildPath,
