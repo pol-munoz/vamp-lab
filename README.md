@@ -16,6 +16,16 @@ VampLab was designed and coded in under 65 hours by a single developer, [me](htt
 * Refresh my React skills, after a 4-year hiatus.
 * Learn the basics of Electron.
 
+## Design
+
+The application's design is mostly derived from a play on words, as "Vamp" can also be associated with "Vampire". Both the primary color being red and the design for the logo link back to this idea.
+
+![VampLab logo, made of a sound wave that warps in the center to resemble vampire fangs.](resources/screenshots/icon.png)
+
+Specifically, the application logo represents a waveform shaped to resemble two sharp fangs. The region between them can also be interpreted as a musical vamp.
+
+The logo design was originally intended to suit a macOS application icon, which was also adapted for Windows. A final version was generated to be used in document type icons for both operating systems.
+
 ## Future additions
 
 The following is a brief list of known issues to fix / improvements to make:
